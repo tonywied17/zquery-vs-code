@@ -1,7 +1,7 @@
 {
-  "name": "zquery-intellisense",
-  "displayName": "zQuery IntelliSense",
-  "description": "Full IntelliSense for the zQuery (zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and code snippets.",
+  "name": "zquery-vs-code",
+  "displayName": "zQuery for VS Code",
+  "description": "Full developer tooling for the zQuery (zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and code snippets.",
   "version": "0.1.0",
   "publisher": "zQuery",
   "author": "Anthony Wiedman",
@@ -9,7 +9,7 @@
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tonywied17/zquery-intellisense"
+    "url": "https://github.com/tonywied17/zquery-vs-code"
   },
   "engines": {
     "vscode": "^1.75.0"
@@ -66,7 +66,7 @@
         "zquery.enable": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable zQuery IntelliSense features."
+          "description": "Enable or disable zQuery for VS Code features."
         }
       }
     }

@@ -1,6 +1,6 @@
-# zQuery IntelliSense
+# zQuery for VS Code
 
-Full IntelliSense for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and 55+ code snippets.
+Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and 55+ code snippets.
 
 ---
 
@@ -73,7 +73,7 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 
 - [zQuery on npm](https://www.npmjs.com/package/zero-query)
 - [zQuery on GitHub](https://github.com/tonywied17/zero-query)
-- [Report an Issue](https://github.com/tonywied17/zquery-intellisense/issues)
+- [Report an Issue](https://github.com/tonywied17/zquery-vs-code/issues)
 
 ## License
 
