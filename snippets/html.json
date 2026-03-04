@@ -1,0 +1,158 @@
+{
+  "z-model Attribute": {
+    "prefix": "z-model",
+    "body": [
+      "z-model=\"${1:stateKey}\""
+    ],
+    "description": "zQuery two-way binding between a form element and component state."
+  },
+  "z-model (Nested)": {
+    "prefix": "z-model-nested",
+    "body": [
+      "z-model=\"${1:parent}.${2:child}\""
+    ],
+    "description": "zQuery two-way binding with dot-notation for nested state."
+  },
+  "z-model + Modifiers": {
+    "prefix": "z-model-mods",
+    "body": [
+      "z-model=\"${1:stateKey}\" ${2|z-lazy,z-trim,z-number|}"
+    ],
+    "description": "zQuery z-model with a modifier (z-lazy, z-trim, z-number)."
+  },
+  "z-ref Attribute": {
+    "prefix": "z-ref",
+    "body": [
+      "z-ref=\"${1:refName}\""
+    ],
+    "description": "zQuery element reference — access via this.refs.refName in component code."
+  },
+  "z-link (Router)": {
+    "prefix": "z-link",
+    "body": [
+      "<a z-link=\"${1:/path}\">${2:Link Text}</a>"
+    ],
+    "description": "zQuery SPA navigation link (intercepted by router, no reload)."
+  },
+  "@click Handler": {
+    "prefix": "@click",
+    "body": [
+      "@click=\"${1:methodName}\""
+    ],
+    "description": "zQuery click event binding to a component method."
+  },
+  "@click with Arguments": {
+    "prefix": "@click-args",
+    "body": [
+      "@click=\"${1:methodName}(${2:args})\""
+    ],
+    "description": "zQuery click event with method arguments."
+  },
+  "@click.prevent": {
+    "prefix": "@click-prevent",
+    "body": [
+      "@click.prevent=\"${1:methodName}\""
+    ],
+    "description": "zQuery click with preventDefault."
+  },
+  "@submit.prevent Handler": {
+    "prefix": "@submit",
+    "body": [
+      "@submit.prevent=\"${1:handleSubmit}\""
+    ],
+    "description": "zQuery form submit binding with preventDefault."
+  },
+  "@input Handler": {
+    "prefix": "@input",
+    "body": [
+      "@input=\"${1:handleInput}\""
+    ],
+    "description": "zQuery input event binding."
+  },
+  "@change Handler": {
+    "prefix": "@change",
+    "body": [
+      "@change=\"${1:handleChange}\""
+    ],
+    "description": "zQuery change event binding."
+  },
+  "@keydown Handler": {
+    "prefix": "@keydown",
+    "body": [
+      "@keydown=\"${1:handleKey}\""
+    ],
+    "description": "zQuery keydown event binding."
+  },
+  "@keyup Handler": {
+    "prefix": "@keyup",
+    "body": [
+      "@keyup=\"${1:handleKey}\""
+    ],
+    "description": "zQuery keyup event binding."
+  },
+  "zQuery Component Tag": {
+    "prefix": "zq-tag",
+    "body": [
+      "<${1:my-component}${2: ${3:prop}=\"${4:value}\"}></${1}>"
+    ],
+    "description": "Custom element tag for a zQuery component."
+  },
+  "zQuery Form (z-model)": {
+    "prefix": "zq-form",
+    "body": [
+      "<form @submit.prevent=\"${1:handleSubmit}\">",
+      "\t<div>",
+      "\t\t<label>${2:Name}</label>",
+      "\t\t<input z-model=\"${3:name}\" ${4:z-trim} placeholder=\"${5:Enter name}\">",
+      "\t</div>",
+      "\t<button>${6:Submit}</button>",
+      "</form>"
+    ],
+    "description": "Form template with z-model bindings and submit handler."
+  },
+  "zQuery Select (z-model)": {
+    "prefix": "zq-select",
+    "body": [
+      "<select z-model=\"${1:selected}\">",
+      "\t<option value=\"${2:opt1}\">${3:Option 1}</option>",
+      "\t<option value=\"${4:opt2}\">${5:Option 2}</option>",
+      "</select>"
+    ],
+    "description": "Select element with z-model binding."
+  },
+  "zQuery Checkbox (z-model)": {
+    "prefix": "zq-checkbox",
+    "body": [
+      "<label>",
+      "\t<input z-model=\"${1:checked}\" type=\"checkbox\">",
+      "\t${2:Label}",
+      "</label>"
+    ],
+    "description": "Checkbox with z-model boolean binding."
+  },
+  "zQuery Router Outlet": {
+    "prefix": "zq-outlet",
+    "body": [
+      "<div id=\"${1:app}\"></div>"
+    ],
+    "description": "Router outlet element."
+  },
+  "zQuery Nav Links": {
+    "prefix": "zq-nav",
+    "body": [
+      "<nav>",
+      "\t<a z-link=\"/\">${1:Home}</a>",
+      "\t<a z-link=\"/${2:about}\">${3:About}</a>",
+      "\t<a z-link=\"/${4:contact}\">${5:Contact}</a>",
+      "</nav>"
+    ],
+    "description": "Navigation bar with z-link router links."
+  },
+  "zQuery Template Expression": {
+    "prefix": "zq-expr",
+    "body": [
+      "{{${1:expression}}}"
+    ],
+    "description": "Template expression for external HTML templates ({{…}})."
+  }
+}

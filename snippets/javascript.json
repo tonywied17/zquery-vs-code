@@ -1,0 +1,386 @@
+{
+  "zQuery Component": {
+    "prefix": "zq-component",
+    "body": [
+      "$.component('${1:my-component}', {",
+      "\tstate: () => ({",
+      "\t\t${2:key}: ${3:value},",
+      "\t}),",
+      "",
+      "\tinit() {",
+      "\t\t${4:// called before first render}",
+      "\t},",
+      "",
+      "\tmounted() {",
+      "\t\t${5:// called after first render}",
+      "\t},",
+      "",
+      "\t${6:handleClick}(e) {",
+      "\t\t${7:// method}",
+      "\t},",
+      "",
+      "\trender() {",
+      "\t\treturn \\`",
+      "\t\t\t<div>",
+      "\t\t\t\t${8:<!-- template -->}",
+      "\t\t\t</div>",
+      "\t\t\\`;",
+      "\t},",
+      "});"
+    ],
+    "description": "Full zQuery component definition with state, lifecycle hooks, methods, and render."
+  },
+  "zQuery Component (Simple)": {
+    "prefix": "zq-component-simple",
+    "body": [
+      "$.component('${1:my-component}', {",
+      "\tstate: () => ({ ${2} }),",
+      "",
+      "\trender() {",
+      "\t\treturn \\`${3}\\`;",
+      "\t},",
+      "});"
+    ],
+    "description": "Minimal zQuery component with state and render."
+  },
+  "zQuery Component (Pages)": {
+    "prefix": "zq-component-pages",
+    "body": [
+      "$.component('${1:docs-page}', {",
+      "\tpages: {",
+      "\t\tdir:     '${2:pages}',",
+      "\t\tparam:   '${3:section}',",
+      "\t\tdefault: '${4:getting-started}',",
+      "\t\titems: [",
+      "\t\t\t'${4}',",
+      "\t\t\t${5:'another-page'},",
+      "\t\t],",
+      "\t},",
+      "",
+      "\tstyleUrl: '${6:styles.css}',",
+      "",
+      "\trender() {",
+      "\t\treturn \\`",
+      "\t\t\t<nav>",
+      "\t\t\t\t\\${this.pages.map(p => \\`",
+      "\t\t\t\t\t<a class=\"\\${this.activePage === p.id ? 'active' : ''}\"",
+      "\t\t\t\t\t   z-link=\"/${1}/\\${p.id}\">\\${p.label}</a>",
+      "\t\t\t\t\\`).join('')}",
+      "\t\t\t</nav>",
+      "\t\t\t<main>\\${this.templates[this.activePage] || ''}</main>",
+      "\t\t\\`;",
+      "\t},",
+      "});"
+    ],
+    "description": "zQuery component with pages config for multi-page sections."
+  },
+  "zQuery Component (External Template)": {
+    "prefix": "zq-component-template",
+    "body": [
+      "$.component('${1:my-component}', {",
+      "\tstate: () => ({ ${2} }),",
+      "\ttemplateUrl: '${3:template.html}',",
+      "\tstyleUrl: '${4:styles.css}',",
+      "});"
+    ],
+    "description": "zQuery component with external template and stylesheet."
+  },
+  "zQuery Router": {
+    "prefix": "zq-router",
+    "body": [
+      "const router = $.router({",
+      "\tel: '${1:#app}',",
+      "\troutes: [",
+      "\t\t{ path: '/', component: '${2:home-page}' },",
+      "\t\t{ path: '/${3:about}', component: '${4:about-page}' },",
+      "\t\t${5}",
+      "\t],",
+      "\tfallback: '${6:not-found}',",
+      "});"
+    ],
+    "description": "zQuery SPA router setup with routes and fallback."
+  },
+  "zQuery Router (Hash Mode)": {
+    "prefix": "zq-router-hash",
+    "body": [
+      "const router = $.router({",
+      "\tel: '${1:#app}',",
+      "\tmode: 'hash',",
+      "\troutes: [",
+      "\t\t{ path: '/', component: '${2:home-page}' },",
+      "\t\t${3}",
+      "\t],",
+      "\tfallback: '${4:not-found}',",
+      "});"
+    ],
+    "description": "zQuery SPA router in hash mode (#/path)."
+  },
+  "zQuery Route (Lazy)": {
+    "prefix": "zq-route-lazy",
+    "body": [
+      "{ path: '/${1:page}', load: () => import('./${2:pages/$1.js}'), component: '${3:$1-page}' },"
+    ],
+    "description": "Lazy-loaded route definition."
+  },
+  "zQuery Route (Fallback)": {
+    "prefix": "zq-route-fallback",
+    "body": [
+      "{ path: '/${1:docs}/:${2:section}', component: '${3:docs-page}', fallback: '/${1}' },"
+    ],
+    "description": "Route with fallback path (used with pages config)."
+  },
+  "zQuery Store": {
+    "prefix": "zq-store",
+    "body": [
+      "const ${1:store} = $.store({",
+      "\tstate: {",
+      "\t\t${2:items}: ${3:[]},",
+      "\t},",
+      "\tactions: {",
+      "\t\t${4:addItem}(state, ${5:item}) {",
+      "\t\t\t${6:state.$2 = [...(state.$2.__raw || state.$2), $5];}",
+      "\t\t},",
+      "\t},",
+      "\tgetters: {",
+      "\t\t${7:count}: (state) => state.${2}.length,",
+      "\t},",
+      "});"
+    ],
+    "description": "zQuery reactive store with state, actions, and getters."
+  },
+  "zQuery Named Store": {
+    "prefix": "zq-store-named",
+    "body": [
+      "const ${1:store} = $.store('${2:storeName}', {",
+      "\tstate: { ${3} },",
+      "\tactions: {",
+      "\t\t${4}",
+      "\t},",
+      "});"
+    ],
+    "description": "Named zQuery store ($.getStore('name') to retrieve)."
+  },
+  "zQuery HTTP Configure": {
+    "prefix": "zq-http-config",
+    "body": [
+      "$.http.configure({",
+      "\tbaseURL: '${1:https://api.example.com}',",
+      "\theaders: { ${2:Authorization: 'Bearer ' + token} },",
+      "\ttimeout: ${3:10000},",
+      "});"
+    ],
+    "description": "Configure zQuery HTTP client defaults."
+  },
+  "zQuery HTTP GET": {
+    "prefix": "zq-get",
+    "body": [
+      "const { data } = await $.get('${1:/api/endpoint}'${2:, { ${3} }});"
+    ],
+    "description": "HTTP GET request with destructured response."
+  },
+  "zQuery HTTP POST": {
+    "prefix": "zq-post",
+    "body": [
+      "const { data } = await $.post('${1:/api/endpoint}', {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "HTTP POST request with JSON body."
+  },
+  "zQuery HTTP (try/catch)": {
+    "prefix": "zq-http-try",
+    "body": [
+      "try {",
+      "\tconst { data } = await $.${1|get,post,put,patch,delete|}('${2:/api/endpoint}'${3});",
+      "\t${4:console.log(data);}",
+      "} catch (err) {",
+      "\tconsole.error(err.response?.status, err.response?.data);",
+      "}"
+    ],
+    "description": "HTTP request with error handling."
+  },
+  "zQuery Signal": {
+    "prefix": "zq-signal",
+    "body": [
+      "const ${1:count} = $.signal(${2:0});"
+    ],
+    "description": "Create a reactive signal."
+  },
+  "zQuery Computed": {
+    "prefix": "zq-computed",
+    "body": [
+      "const ${1:derived} = $.computed(() => ${2:count.value * 2});"
+    ],
+    "description": "Create a computed (derived) signal."
+  },
+  "zQuery Effect": {
+    "prefix": "zq-effect",
+    "body": [
+      "const dispose = $.effect(() => {",
+      "\t${1:// runs when signals change}",
+      "});"
+    ],
+    "description": "Create a reactive effect with auto-tracking."
+  },
+  "zQuery Reactive": {
+    "prefix": "zq-reactive",
+    "body": [
+      "const ${1:state} = $.reactive({ ${2} }, (key, value, old) => {",
+      "\t${3:// property changed}",
+      "});"
+    ],
+    "description": "Create a deep reactive proxy."
+  },
+  "zQuery Mount": {
+    "prefix": "zq-mount",
+    "body": [
+      "const ${1:instance} = $.mount('${2:#app}', '${3:component-name}'${4:, { ${5} }});"
+    ],
+    "description": "Mount a registered component."
+  },
+  "zQuery Ready": {
+    "prefix": "zq-ready",
+    "body": [
+      "$.ready(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "DOM ready callback (DOMContentLoaded)."
+  },
+  "zQuery Bus On": {
+    "prefix": "zq-bus-on",
+    "body": [
+      "const unsub = $.bus.on('${1:event}', (${2:data}) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Subscribe to an event bus event."
+  },
+  "zQuery Bus Emit": {
+    "prefix": "zq-bus-emit",
+    "body": [
+      "$.bus.emit('${1:event}', ${2:data});"
+    ],
+    "description": "Emit an event on the event bus."
+  },
+  "zQuery Debounce": {
+    "prefix": "zq-debounce",
+    "body": [
+      "const ${1:handler} = $.debounce((${2}) => {",
+      "\t${3}",
+      "}, ${4:300});"
+    ],
+    "description": "Create a debounced function."
+  },
+  "zQuery Throttle": {
+    "prefix": "zq-throttle",
+    "body": [
+      "const ${1:handler} = $.throttle((${2}) => {",
+      "\t${3}",
+      "}, ${4:100});"
+    ],
+    "description": "Create a throttled function."
+  },
+  "zQuery Event Delegation": {
+    "prefix": "zq-on",
+    "body": [
+      "$.on('${1:click}', '${2:.selector}', function(e) {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Global event delegation on document."
+  },
+  "zQuery Style Loader": {
+    "prefix": "zq-style",
+    "body": [
+      "const ${1:styles} = $.style('${2:path/to/style.css}');",
+      "await ${1}.ready;"
+    ],
+    "description": "Dynamically load a global stylesheet."
+  },
+  "zQuery Router Guard": {
+    "prefix": "zq-guard",
+    "body": [
+      "router.beforeEach(async (to, from) => {",
+      "\t${1:// return false to cancel, or '/path' to redirect}",
+      "});"
+    ],
+    "description": "Add a router navigation guard."
+  },
+  "zQuery Router onChange": {
+    "prefix": "zq-route-change",
+    "body": [
+      "const unsub = router.onChange((to, from) => {",
+      "\t${1:console.log('Navigated to', to.path);}",
+      "});"
+    ],
+    "description": "Subscribe to route changes."
+  },
+  "zQuery Store Subscribe": {
+    "prefix": "zq-store-sub",
+    "body": [
+      "const unsub = ${1:store}.subscribe('${2:key}', (value, old) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Subscribe to a specific store state key."
+  },
+  "zQuery Store Middleware": {
+    "prefix": "zq-store-use",
+    "body": [
+      "${1:store}.use((action, args, state) => {",
+      "\t${2:console.log(action, args);}",
+      "\t// return false to block the action",
+      "});"
+    ],
+    "description": "Add store middleware."
+  },
+  "zQuery Interceptor (Request)": {
+    "prefix": "zq-interceptor-req",
+    "body": [
+      "$.http.onRequest(async (opts, url) => {",
+      "\t${1:opts.headers['Authorization'] = 'Bearer ' + getToken();}",
+      "});"
+    ],
+    "description": "Add an HTTP request interceptor."
+  },
+  "zQuery Interceptor (Response)": {
+    "prefix": "zq-interceptor-res",
+    "body": [
+      "$.http.onResponse(async (result) => {",
+      "\t${1:if (result.status === 401) { /* handle */ \\}}",
+      "});"
+    ],
+    "description": "Add an HTTP response interceptor."
+  },
+  "zQuery Collection Chain": {
+    "prefix": "zq-all",
+    "body": [
+      "$.all('${1:.selector}')${2:.each((i, el) => {",
+      "\t${3}",
+      "});}$0"
+    ],
+    "description": "Query all matching elements and chain a method."
+  },
+  "zQuery Create Element": {
+    "prefix": "zq-create",
+    "body": [
+      "const ${1:el} = $.create('${2:div}', {",
+      "\tclass: '${3}',",
+      "\t${4}",
+      "}, ${5:'content'});"
+    ],
+    "description": "Create a DOM element with attributes."
+  },
+  "zQuery Import (ESM)": {
+    "prefix": "zq-import",
+    "body": [
+      "import {",
+      "\t$, ${1:component, mount, mountAll},",
+      "\t${2:createRouter, getRouter},",
+      "\t${3:createStore, getStore},",
+      "} from 'zero-query';"
+    ],
+    "description": "Import zQuery named exports (ESM)."
+  }
+}
