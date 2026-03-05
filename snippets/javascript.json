@@ -1,4 +1,240 @@
 {
+
+  "_comment_selectors": "──── Selectors & DOM ────",
+
+  "zQuery Select ($)": {
+    "prefix": "zq-select",
+    "body": [
+      "const ${1:el} = $('${2:selector}');"
+    ],
+    "description": "CSS selector — first matching element via querySelector."
+  },
+  "zQuery Select Scoped": {
+    "prefix": "zq-select-scoped",
+    "body": [
+      "const ${1:el} = $('${2:selector}', '${3:#parent}');"
+    ],
+    "description": "Scoped CSS selector — first match inside a parent element."
+  },
+  "zQuery Select by ID": {
+    "prefix": "zq-id",
+    "body": [
+      "const ${1:el} = $.id('${2:elementId}');"
+    ],
+    "description": "Select element by ID — document.getElementById."
+  },
+  "zQuery Select by Class": {
+    "prefix": "zq-class",
+    "body": [
+      "const ${1:el} = $.class('${2:className}');"
+    ],
+    "description": "Select first element with class — querySelector('.name')."
+  },
+  "zQuery Select All by Class": {
+    "prefix": "zq-classes",
+    "body": [
+      "const ${1:elements} = $.classes('${2:className}');"
+    ],
+    "description": "Select all elements with class — getElementsByClassName as array."
+  },
+  "zQuery Select by Tag": {
+    "prefix": "zq-bytag",
+    "body": [
+      "const ${1:elements} = $.tag('${2:div}');"
+    ],
+    "description": "Select all elements by tag name — getElementsByTagName as array."
+  },
+  "zQuery Children": {
+    "prefix": "zq-children",
+    "body": [
+      "const ${1:items} = $.children('${2:parentId}');"
+    ],
+    "description": "Direct children of #parentId as array."
+  },
+  "zQuery Collection Chain": {
+    "prefix": "zq-all",
+    "body": [
+      "$.all('${1:.selector}')${2:.each((i, el) => {",
+      "\t${3}",
+      "});}$0"
+    ],
+    "description": "Query all matching elements and chain a method."
+  },
+  "zQuery Create Element": {
+    "prefix": "zq-create",
+    "body": [
+      "const ${1:el} = $.create('${2:div}', {",
+      "\tclass: '${3}',",
+      "\t${4}",
+      "}, ${5:'content'});"
+    ],
+    "description": "Create a DOM element with attributes."
+  },
+  "zQuery DOM Ready ($)": {
+    "prefix": "zq-domready",
+    "body": [
+      "$(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "DOM-ready callback shorthand using $(fn)."
+  },
+  "zQuery Ready": {
+    "prefix": "zq-ready",
+    "body": [
+      "$.ready(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "DOM ready callback (DOMContentLoaded)."
+  },
+
+  "_comment_collection": "──── Collection Operations ────",
+
+  "zQuery Collection .on()": {
+    "prefix": "zq-all-on",
+    "body": [
+      "$.all('${1:.selector}').on('${2:click}', (e) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Attach event handler to all matching elements."
+  },
+  "zQuery Collection .addClass()": {
+    "prefix": "zq-all-addclass",
+    "body": [
+      "$.all('${1:.selector}').addClass('${2:className}');"
+    ],
+    "description": "Add a class to all matching elements."
+  },
+  "zQuery Collection .css()": {
+    "prefix": "zq-all-css",
+    "body": [
+      "$.all('${1:.selector}').css({ ${2:opacity}: '${3:0}' });"
+    ],
+    "description": "Set inline styles on all matching elements."
+  },
+  "zQuery Collection .animate()": {
+    "prefix": "zq-all-animate",
+    "body": [
+      "await $.all('${1:.selector}').animate({ ${2:opacity: '0', transform: 'translateY(-10px)'} }, ${3:300});"
+    ],
+    "description": "Animate CSS properties on matching elements (returns Promise)."
+  },
+  "zQuery Collection .fadeIn()": {
+    "prefix": "zq-all-fadein",
+    "body": [
+      "await $.all('${1:.selector}').fadeIn(${2:300});"
+    ],
+    "description": "Fade in matching elements (opacity 0→1, returns Promise)."
+  },
+  "zQuery Collection .fadeOut()": {
+    "prefix": "zq-all-fadeout",
+    "body": [
+      "await $.all('${1:.selector}').fadeOut(${2:300});"
+    ],
+    "description": "Fade out matching elements (opacity 1→0, returns Promise)."
+  },
+  "zQuery Collection .slideToggle()": {
+    "prefix": "zq-all-slidetoggle",
+    "body": [
+      "$.all('${1:.selector}').slideToggle(${2:300});"
+    ],
+    "description": "Toggle height with slide animation on matching elements."
+  },
+  "zQuery Form Serialize": {
+    "prefix": "zq-serialize",
+    "body": [
+      "const ${1:data} = $.all('${2:#myForm}').serializeObject();"
+    ],
+    "description": "Serialize form data as key/value object."
+  },
+  "zQuery Plugin ($.fn)": {
+    "prefix": "zq-plugin",
+    "body": [
+      "$.fn.${1:methodName} = function(${2}) {",
+      "\treturn this.each((i, el) => {",
+      "\t\t${3}",
+      "\t});",
+      "};"
+    ],
+    "description": "Extend ZQueryCollection with a custom plugin method."
+  },
+
+  "_comment_events": "──── Events ────",
+
+  "zQuery Event Delegation": {
+    "prefix": "zq-on",
+    "body": [
+      "$.on('${1:click}', '${2:.selector}', function(e) {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Global delegated event listener on document (3-arg form)."
+  },
+  "zQuery Direct Event Listener": {
+    "prefix": "zq-on-direct",
+    "body": [
+      "$.on('${1:keydown}', (e) => {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "Direct global event listener on document (2-arg form — keydown, resize, etc.)."
+  },
+  "zQuery Remove Global Listener": {
+    "prefix": "zq-off",
+    "body": [
+      "$.off('${1:event}', ${2:handler});"
+    ],
+    "description": "Remove a direct global event listener added with $.on(event, handler)."
+  },
+
+  "_comment_reactive": "──── Reactive ────",
+
+  "zQuery Signal": {
+    "prefix": "zq-signal",
+    "body": [
+      "const ${1:count} = $.signal(${2:0});"
+    ],
+    "description": "Create a reactive signal."
+  },
+  "zQuery Signal Subscribe": {
+    "prefix": "zq-signal-sub",
+    "body": [
+      "const unsub = ${1:signal}.subscribe(() => {",
+      "\t${2:console.log(${1}.value);}",
+      "});"
+    ],
+    "description": "Manually subscribe to a signal's changes."
+  },
+  "zQuery Computed": {
+    "prefix": "zq-computed",
+    "body": [
+      "const ${1:derived} = $.computed(() => ${2:count.value * 2});"
+    ],
+    "description": "Create a computed (derived) signal."
+  },
+  "zQuery Effect": {
+    "prefix": "zq-effect",
+    "body": [
+      "const dispose = $.effect(() => {",
+      "\t${1:// runs when signals change}",
+      "});"
+    ],
+    "description": "Create a reactive effect with auto-tracking."
+  },
+  "zQuery Reactive": {
+    "prefix": "zq-reactive",
+    "body": [
+      "const ${1:state} = $.reactive({ ${2} }, (key, value, old) => {",
+      "\t${3:// property changed}",
+      "});"
+    ],
+    "description": "Create a deep reactive proxy."
+  },
+
+  "_comment_components": "──── Components ────",
+
   "zQuery Component": {
     "prefix": "zq-component",
     "body": [
@@ -85,6 +321,58 @@
     ],
     "description": "zQuery component with external template and stylesheet."
   },
+  "zQuery Mount": {
+    "prefix": "zq-mount",
+    "body": [
+      "const ${1:instance} = $.mount('${2:#app}', '${3:component-name}'${4:, { ${5} }});"
+    ],
+    "description": "Mount a registered component."
+  },
+  "zQuery Mount All": {
+    "prefix": "zq-mountall",
+    "body": [
+      "$.mountAll(${1});"
+    ],
+    "description": "Auto-mount all registered component tags found in the DOM."
+  },
+  "zQuery Get Instance": {
+    "prefix": "zq-getinstance",
+    "body": [
+      "const ${1:instance} = $.getInstance('${2:#target}');"
+    ],
+    "description": "Get the component instance mounted at a target element."
+  },
+  "zQuery Destroy Component": {
+    "prefix": "zq-destroy",
+    "body": [
+      "$.destroy('${1:#target}');"
+    ],
+    "description": "Destroy the component mounted at the given target."
+  },
+  "zQuery List Components": {
+    "prefix": "zq-components",
+    "body": [
+      "console.log($.components());"
+    ],
+    "description": "List all registered component definitions (debugging)."
+  },
+  "zQuery Component setState": {
+    "prefix": "zq-setstate",
+    "body": [
+      "this.setState({ ${1:key}: ${2:value} });"
+    ],
+    "description": "Merge partial state into component (triggers re-render)."
+  },
+  "zQuery Component Emit": {
+    "prefix": "zq-emit",
+    "body": [
+      "this.emit('${1:eventName}', { ${2} });"
+    ],
+    "description": "Dispatch a bubbling CustomEvent from the component root."
+  },
+
+  "_comment_router": "──── Router ────",
+
   "zQuery Router": {
     "prefix": "zq-router",
     "body": [
@@ -129,6 +417,55 @@
     ],
     "description": "Route with fallback path (used with pages config)."
   },
+  "zQuery Router Guard": {
+    "prefix": "zq-guard",
+    "body": [
+      "router.beforeEach(async (to, from) => {",
+      "\t${1:// return false to cancel, or '/path' to redirect}",
+      "});"
+    ],
+    "description": "Add a router navigation guard."
+  },
+  "zQuery Router onChange": {
+    "prefix": "zq-route-change",
+    "body": [
+      "const unsub = router.onChange((to, from) => {",
+      "\t${1:console.log('Navigated to', to.path);}",
+      "});"
+    ],
+    "description": "Subscribe to route changes."
+  },
+  "zQuery Get Router": {
+    "prefix": "zq-getrouter",
+    "body": [
+      "const ${1:router} = $.getRouter();"
+    ],
+    "description": "Get the currently active router instance."
+  },
+  "zQuery Router Navigate": {
+    "prefix": "zq-navigate",
+    "body": [
+      "${1:router}.navigate('${2:/path}');"
+    ],
+    "description": "Navigate to a path using the router."
+  },
+  "zQuery Router Replace": {
+    "prefix": "zq-replace",
+    "body": [
+      "${1:router}.replace('${2:/path}');"
+    ],
+    "description": "Replace the current route (no new history entry)."
+  },
+  "zQuery Route (Dynamic Add)": {
+    "prefix": "zq-route-add",
+    "body": [
+      "${1:router}.add({ path: '${2:/page}', component: '${3:page-component}' });"
+    ],
+    "description": "Add a route dynamically at runtime."
+  },
+
+  "_comment_store": "──── Store ────",
+
   "zQuery Store": {
     "prefix": "zq-store",
     "body": [
@@ -160,6 +497,49 @@
     ],
     "description": "Named zQuery store ($.getStore('name') to retrieve)."
   },
+  "zQuery Get Store": {
+    "prefix": "zq-getstore",
+    "body": [
+      "const ${1:store} = $.getStore(${2:'default'});"
+    ],
+    "description": "Retrieve a previously created store by name."
+  },
+  "zQuery Store Subscribe": {
+    "prefix": "zq-store-sub",
+    "body": [
+      "const unsub = ${1:store}.subscribe('${2:key}', (value, old) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Subscribe to a specific store state key."
+  },
+  "zQuery Store Dispatch": {
+    "prefix": "zq-dispatch",
+    "body": [
+      "${1:store}.dispatch('${2:actionName}'${3:, ${4:payload}});"
+    ],
+    "description": "Dispatch a named store action."
+  },
+  "zQuery Store Snapshot": {
+    "prefix": "zq-snapshot",
+    "body": [
+      "const ${1:snapshot} = ${2:store}.snapshot();"
+    ],
+    "description": "Deep clone of current store state."
+  },
+  "zQuery Store Middleware": {
+    "prefix": "zq-store-use",
+    "body": [
+      "${1:store}.use((action, args, state) => {",
+      "\t${2:console.log(action, args);}",
+      "\t// return false to block the action",
+      "});"
+    ],
+    "description": "Add store middleware."
+  },
+
+  "_comment_http": "──── HTTP Client ────",
+
   "zQuery HTTP Configure": {
     "prefix": "zq-http-config",
     "body": [
@@ -187,6 +567,31 @@
     ],
     "description": "HTTP POST request with JSON body."
   },
+  "zQuery HTTP PUT": {
+    "prefix": "zq-put",
+    "body": [
+      "const { data } = await $.put('${1:/api/endpoint}', {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "HTTP PUT request with JSON body."
+  },
+  "zQuery HTTP PATCH": {
+    "prefix": "zq-patch",
+    "body": [
+      "const { data } = await $.patch('${1:/api/endpoint}', {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "HTTP PATCH request with JSON body."
+  },
+  "zQuery HTTP DELETE": {
+    "prefix": "zq-delete",
+    "body": [
+      "await $.delete('${1:/api/endpoint}');"
+    ],
+    "description": "HTTP DELETE request."
+  },
   "zQuery HTTP (try/catch)": {
     "prefix": "zq-http-try",
     "body": [
@@ -199,157 +604,14 @@
     ],
     "description": "HTTP request with error handling."
   },
-  "zQuery Signal": {
-    "prefix": "zq-signal",
+  "zQuery HTTP Abort": {
+    "prefix": "zq-http-abort",
     "body": [
-      "const ${1:count} = $.signal(${2:0});"
+      "const controller = $.http.createAbort();",
+      "$.get('${1:/api/endpoint}', null, { signal: controller.signal });",
+      "${2:controller.abort(); // cancel the request}"
     ],
-    "description": "Create a reactive signal."
-  },
-  "zQuery Computed": {
-    "prefix": "zq-computed",
-    "body": [
-      "const ${1:derived} = $.computed(() => ${2:count.value * 2});"
-    ],
-    "description": "Create a computed (derived) signal."
-  },
-  "zQuery Effect": {
-    "prefix": "zq-effect",
-    "body": [
-      "const dispose = $.effect(() => {",
-      "\t${1:// runs when signals change}",
-      "});"
-    ],
-    "description": "Create a reactive effect with auto-tracking."
-  },
-  "zQuery Reactive": {
-    "prefix": "zq-reactive",
-    "body": [
-      "const ${1:state} = $.reactive({ ${2} }, (key, value, old) => {",
-      "\t${3:// property changed}",
-      "});"
-    ],
-    "description": "Create a deep reactive proxy."
-  },
-  "zQuery Mount": {
-    "prefix": "zq-mount",
-    "body": [
-      "const ${1:instance} = $.mount('${2:#app}', '${3:component-name}'${4:, { ${5} }});"
-    ],
-    "description": "Mount a registered component."
-  },
-  "zQuery Ready": {
-    "prefix": "zq-ready",
-    "body": [
-      "$.ready(() => {",
-      "\t${1}",
-      "});"
-    ],
-    "description": "DOM ready callback (DOMContentLoaded)."
-  },
-  "zQuery Bus On": {
-    "prefix": "zq-bus-on",
-    "body": [
-      "const unsub = $.bus.on('${1:event}', (${2:data}) => {",
-      "\t${3}",
-      "});"
-    ],
-    "description": "Subscribe to an event bus event."
-  },
-  "zQuery Bus Emit": {
-    "prefix": "zq-bus-emit",
-    "body": [
-      "$.bus.emit('${1:event}', ${2:data});"
-    ],
-    "description": "Emit an event on the event bus."
-  },
-  "zQuery Debounce": {
-    "prefix": "zq-debounce",
-    "body": [
-      "const ${1:handler} = $.debounce((${2}) => {",
-      "\t${3}",
-      "}, ${4:300});"
-    ],
-    "description": "Create a debounced function."
-  },
-  "zQuery Throttle": {
-    "prefix": "zq-throttle",
-    "body": [
-      "const ${1:handler} = $.throttle((${2}) => {",
-      "\t${3}",
-      "}, ${4:100});"
-    ],
-    "description": "Create a throttled function."
-  },
-  "zQuery Event Delegation": {
-    "prefix": "zq-on",
-    "body": [
-      "$.on('${1:click}', '${2:.selector}', function(e) {",
-      "\t${3}",
-      "});"
-    ],
-    "description": "Global delegated event listener on document (3-arg form)."
-  },
-  "zQuery Direct Event Listener": {
-    "prefix": "zq-on-direct",
-    "body": [
-      "$.on('${1:keydown}', (e) => {",
-      "\t${2}",
-      "});"
-    ],
-    "description": "Direct global event listener on document (2-arg form — keydown, resize, etc.)."
-  },
-  "zQuery Remove Global Listener": {
-    "prefix": "zq-off",
-    "body": [
-      "$.off('${1:event}', ${2:handler});"
-    ],
-    "description": "Remove a direct global event listener added with $.on(event, handler)."
-  },
-  "zQuery Style Loader": {
-    "prefix": "zq-style",
-    "body": [
-      "const ${1:styles} = $.style('${2:path/to/style.css}');",
-      "await ${1}.ready;"
-    ],
-    "description": "Dynamically load a global stylesheet."
-  },
-  "zQuery Router Guard": {
-    "prefix": "zq-guard",
-    "body": [
-      "router.beforeEach(async (to, from) => {",
-      "\t${1:// return false to cancel, or '/path' to redirect}",
-      "});"
-    ],
-    "description": "Add a router navigation guard."
-  },
-  "zQuery Router onChange": {
-    "prefix": "zq-route-change",
-    "body": [
-      "const unsub = router.onChange((to, from) => {",
-      "\t${1:console.log('Navigated to', to.path);}",
-      "});"
-    ],
-    "description": "Subscribe to route changes."
-  },
-  "zQuery Store Subscribe": {
-    "prefix": "zq-store-sub",
-    "body": [
-      "const unsub = ${1:store}.subscribe('${2:key}', (value, old) => {",
-      "\t${3}",
-      "});"
-    ],
-    "description": "Subscribe to a specific store state key."
-  },
-  "zQuery Store Middleware": {
-    "prefix": "zq-store-use",
-    "body": [
-      "${1:store}.use((action, args, state) => {",
-      "\t${2:console.log(action, args);}",
-      "\t// return false to block the action",
-      "});"
-    ],
-    "description": "Add store middleware."
+    "description": "Create an AbortController for request cancellation."
   },
   "zQuery Interceptor (Request)": {
     "prefix": "zq-interceptor-req",
@@ -369,24 +631,203 @@
     ],
     "description": "Add an HTTP response interceptor."
   },
-  "zQuery Collection Chain": {
-    "prefix": "zq-all",
+
+  "_comment_utilities": "──── Utilities ────",
+
+  "zQuery Debounce": {
+    "prefix": "zq-debounce",
     "body": [
-      "$.all('${1:.selector}')${2:.each((i, el) => {",
+      "const ${1:handler} = $.debounce((${2}) => {",
       "\t${3}",
-      "});}$0"
+      "}, ${4:300});"
     ],
-    "description": "Query all matching elements and chain a method."
+    "description": "Create a debounced function."
   },
-  "zQuery Create Element": {
-    "prefix": "zq-create",
+  "zQuery Throttle": {
+    "prefix": "zq-throttle",
     "body": [
-      "const ${1:el} = $.create('${2:div}', {",
-      "\tclass: '${3}',",
-      "\t${4}",
-      "}, ${5:'content'});"
+      "const ${1:handler} = $.throttle((${2}) => {",
+      "\t${3}",
+      "}, ${4:100});"
     ],
-    "description": "Create a DOM element with attributes."
+    "description": "Create a throttled function."
+  },
+  "zQuery Pipe": {
+    "prefix": "zq-pipe",
+    "body": [
+      "const ${1:process} = $.pipe(",
+      "\t(val) => ${2:val.trim()},",
+      "\t(val) => ${3:val.toLowerCase()},",
+      ");"
+    ],
+    "description": "Left-to-right function composition."
+  },
+  "zQuery Once": {
+    "prefix": "zq-once",
+    "body": [
+      "const ${1:load} = $.once(async () => {",
+      "\t${2:return await fetch('/config.json');}",
+      "});"
+    ],
+    "description": "Function that executes only once and caches the result."
+  },
+  "zQuery Sleep": {
+    "prefix": "zq-sleep",
+    "body": [
+      "await $.sleep(${1:1000});"
+    ],
+    "description": "Await a Promise that resolves after ms milliseconds."
+  },
+  "zQuery UUID": {
+    "prefix": "zq-uuid",
+    "body": [
+      "const ${1:id} = $.uuid();"
+    ],
+    "description": "Generate a UUID v4 string."
+  },
+  "zQuery Escape HTML": {
+    "prefix": "zq-escapehtml",
+    "body": [
+      "$.escapeHtml(${1:str})"
+    ],
+    "description": "Escape HTML entities: &, <, >, \", '."
+  },
+  "zQuery Safe HTML Template": {
+    "prefix": "zq-html-safe",
+    "body": [
+      "$.html`${1:<div>\\${${2:unsafeVar}}</div>}`"
+    ],
+    "description": "Tagged template literal that auto-escapes interpolated values."
+  },
+  "zQuery Trust HTML": {
+    "prefix": "zq-trust",
+    "body": [
+      "$.trust(${1:htmlString})"
+    ],
+    "description": "Mark an HTML string as trusted (won't be escaped inside $.html)."
+  },
+  "zQuery camelCase": {
+    "prefix": "zq-camelcase",
+    "body": [
+      "$.camelCase('${1:my-string}')"
+    ],
+    "description": "Convert kebab-case to camelCase."
+  },
+  "zQuery kebabCase": {
+    "prefix": "zq-kebabcase",
+    "body": [
+      "$.kebabCase('${1:myString}')"
+    ],
+    "description": "Convert camelCase to kebab-case."
+  },
+  "zQuery Deep Clone": {
+    "prefix": "zq-deepclone",
+    "body": [
+      "const ${1:clone} = $.deepClone(${2:obj});"
+    ],
+    "description": "Deep clone an object using structuredClone (JSON fallback)."
+  },
+  "zQuery Deep Merge": {
+    "prefix": "zq-deepmerge",
+    "body": [
+      "const ${1:merged} = $.deepMerge({}, ${2:defaults}, ${3:overrides});"
+    ],
+    "description": "Recursively merge objects. Arrays are replaced, not merged."
+  },
+  "zQuery Deep Equal": {
+    "prefix": "zq-isequal",
+    "body": [
+      "$.isEqual(${1:a}, ${2:b})"
+    ],
+    "description": "Deep equality comparison between two values."
+  },
+  "zQuery URL Param": {
+    "prefix": "zq-param",
+    "body": [
+      "const ${1:qs} = $.param({ ${2:page: 1, sort: 'name'} });"
+    ],
+    "description": "Serialize an object to a URL query string."
+  },
+  "zQuery Parse Query": {
+    "prefix": "zq-parsequery",
+    "body": [
+      "const ${1:params} = $.parseQuery(${2:location.search});"
+    ],
+    "description": "Parse a URL query string into an object."
+  },
+
+  "_comment_storage": "──── Storage & Event Bus ────",
+
+  "zQuery Storage Set": {
+    "prefix": "zq-storage-set",
+    "body": [
+      "$.storage.set('${1:key}', ${2:value});"
+    ],
+    "description": "JSON-stringify and store a value in localStorage."
+  },
+  "zQuery Storage Get": {
+    "prefix": "zq-storage-get",
+    "body": [
+      "const ${1:val} = $.storage.get('${2:key}'${3:, ${4:fallback}});"
+    ],
+    "description": "Get and JSON-parse a value from localStorage."
+  },
+  "zQuery Session Set": {
+    "prefix": "zq-session-set",
+    "body": [
+      "$.session.set('${1:key}', ${2:value});"
+    ],
+    "description": "JSON-stringify and store a value in sessionStorage."
+  },
+  "zQuery Session Get": {
+    "prefix": "zq-session-get",
+    "body": [
+      "const ${1:val} = $.session.get('${2:key}'${3:, ${4:fallback}});"
+    ],
+    "description": "Get and JSON-parse a value from sessionStorage."
+  },
+  "zQuery Bus On": {
+    "prefix": "zq-bus-on",
+    "body": [
+      "const unsub = $.bus.on('${1:event}', (${2:data}) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Subscribe to an event bus event."
+  },
+  "zQuery Bus Emit": {
+    "prefix": "zq-bus-emit",
+    "body": [
+      "$.bus.emit('${1:event}', ${2:data});"
+    ],
+    "description": "Emit an event on the event bus."
+  },
+  "zQuery Bus Once": {
+    "prefix": "zq-bus-once",
+    "body": [
+      "const unsub = $.bus.once('${1:event}', (${2:data}) => {",
+      "\t${3}",
+      "});"
+    ],
+    "description": "Subscribe to an event bus event for a single invocation."
+  },
+  "zQuery Bus Clear": {
+    "prefix": "zq-bus-clear",
+    "body": [
+      "$.bus.clear();"
+    ],
+    "description": "Remove all event bus listeners."
+  },
+
+  "_comment_global": "──── Global & ESM ────",
+
+  "zQuery Style Loader": {
+    "prefix": "zq-style",
+    "body": [
+      "const ${1:styles} = $.style('${2:path/to/style.css}');",
+      "await ${1}.ready;"
+    ],
+    "description": "Dynamically load a global stylesheet."
   },
   "zQuery Import (ESM)": {
     "prefix": "zq-import",
@@ -398,5 +839,12 @@
       "} from 'zero-query';"
     ],
     "description": "Import zQuery named exports (ESM)."
+  },
+  "zQuery noConflict": {
+    "prefix": "zq-noconflict",
+    "body": [
+      "const ${1:zq} = $.noConflict();"
+    ],
+    "description": "Remove $ from window and return the zQuery library object."
   }
 }

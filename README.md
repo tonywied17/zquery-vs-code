@@ -1,6 +1,6 @@
 # zQuery for VS Code
 
-Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and 55+ code snippets.
+Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and **120+ code snippets**.
 
 ---
 
@@ -12,49 +12,231 @@ Type `$.` anywhere in JavaScript or TypeScript to instantly see every method on 
 
 - **Namespace completions** — `$.*`, `$.http.*`, `$.storage.*`, `$.session.*`, `$.bus.*`
 - **Collection chain completions** — `$.all('selector').` suggests 50+ chainable methods
+- **Component key completions** — Inside `$.component({})` get suggestions for `state`, `mount`, `render`, `methods`, lifecycle hooks, and more
 - **HTML directive completions** — `@` triggers event directives, `z-` triggers zQuery directives inside HTML tags
 
 ### Hover Documentation
 
 Hover over any `$` method call or HTML directive to see rich inline documentation with code examples.
 
-- `$.component`, `$.mount`, `$.http.get`, `$.storage.get`, `$.bus.on`, and more
+- `$`, `$.id`, `$.class`, `$.all`, `$.component`, `$.mount`, `$.http.get`, `$.storage.get`, `$.bus.on`, and more
 - Directive docs for `@click`, `@submit.prevent`, `z-model`, `z-ref`, `z-link`
 - Works across **JavaScript**, **TypeScript**, and **HTML** files
 
 ### Code Snippets
 
-**55+ snippets** for rapid development — type `zq-` to browse them all.
+**120+ snippets** covering the entire zQuery API — type `zq-` to browse them all.
 
-#### JavaScript / TypeScript
+---
+
+## JavaScript / TypeScript Snippets
+
+### Selectors & DOM
 
 | Prefix | Description |
 |--------|-------------|
-| `zq-component` | Full component definition with setup, template, and styles |
-| `zq-component-simple` | Minimal component scaffold |
-| `zq-router` | SPA router with history mode |
-| `zq-store` | Store with state, actions, and getters |
-| `zq-get` / `zq-post` | HTTP GET / POST requests |
-| `zq-http-try` | HTTP request with error handling |
-| `zq-signal` | Reactive signal |
-| `zq-computed` | Computed signal |
-| `zq-effect` | Reactive effect |
-| `zq-mount` | Mount a component to the DOM |
-| `zq-bus-on` / `zq-bus-emit` | Event bus subscribe / emit |
-| `zq-guard` | Router navigation guard |
-| `zq-import` | ESM import statement |
+| `zq-select` | CSS selector — first match via `querySelector` |
+| `zq-select-scoped` | Scoped selector — first match inside a parent |
+| `zq-id` | Select by ID |
+| `zq-class` | Select first element with class |
+| `zq-classes` | Select all elements with class |
+| `zq-bytag` | Select all elements by tag name |
+| `zq-children` | Direct children of a parent element |
+| `zq-all` | Query all matching elements and chain a method |
+| `zq-create` | Create a DOM element with attributes |
+| `zq-domready` | DOM-ready callback shorthand `$(fn)` |
+| `zq-ready` | DOM ready callback (`DOMContentLoaded`) |
 
-#### HTML
+### Collection Operations
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-all-on` | Attach event handler to all matching elements |
+| `zq-all-addclass` | Add a class to all matching elements |
+| `zq-all-css` | Set inline styles on all matching elements |
+| `zq-all-animate` | Animate CSS properties (returns Promise) |
+| `zq-all-fadein` | Fade in elements (opacity 0→1) |
+| `zq-all-fadeout` | Fade out elements (opacity 1→0) |
+| `zq-all-slidetoggle` | Toggle height with slide animation |
+| `zq-serialize` | Serialize form data as key/value object |
+| `zq-plugin` | Extend `ZQueryCollection` with a custom method |
+
+### Events
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-on` | Global delegated event listener (3-arg) |
+| `zq-on-direct` | Direct global event listener (2-arg) |
+| `zq-off` | Remove a global event listener |
+
+### Reactive
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-signal` | Create a reactive signal |
+| `zq-signal-sub` | Subscribe to a signal's changes |
+| `zq-computed` | Create a computed (derived) signal |
+| `zq-effect` | Create a reactive effect |
+| `zq-reactive` | Create a deep reactive proxy |
+
+### Components
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-component` | Full component with state, lifecycle, methods, render |
+| `zq-component-simple` | Minimal component scaffold |
+| `zq-component-pages` | Component with pages config (lazy-loaded sections) |
+| `zq-component-template` | Component with external template and stylesheet |
+| `zq-mount` | Mount a registered component |
+| `zq-mountall` | Auto-mount all registered component tags |
+| `zq-getinstance` | Get the component instance at a target element |
+| `zq-destroy` | Destroy a mounted component |
+| `zq-components` | List all registered component definitions |
+| `zq-setstate` | Merge partial state (triggers re-render) |
+| `zq-emit` | Dispatch a CustomEvent from the component root |
+
+### Router
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-router` | SPA router with routes and fallback |
+| `zq-router-hash` | Hash-mode router (`#/path`) |
+| `zq-route-lazy` | Lazy-loaded route definition |
+| `zq-route-fallback` | Route with fallback path |
+| `zq-guard` | Navigation guard |
+| `zq-route-change` | Subscribe to route changes |
+| `zq-getrouter` | Get the active router instance |
+| `zq-navigate` | Navigate to a path |
+| `zq-replace` | Replace the current route (no history entry) |
+| `zq-route-add` | Add a route dynamically at runtime |
+
+### Store
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-store` | Store with state, actions, and getters |
+| `zq-store-named` | Named store (retrieve via `$.getStore`) |
+| `zq-getstore` | Retrieve a store by name |
+| `zq-store-sub` | Subscribe to a store state key |
+| `zq-dispatch` | Dispatch a store action |
+| `zq-snapshot` | Deep clone of current store state |
+| `zq-store-use` | Add store middleware |
+
+### HTTP Client
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-http-config` | Configure HTTP client defaults |
+| `zq-get` | HTTP GET request |
+| `zq-post` | HTTP POST request |
+| `zq-put` | HTTP PUT request |
+| `zq-patch` | HTTP PATCH request |
+| `zq-delete` | HTTP DELETE request |
+| `zq-http-try` | HTTP request with error handling |
+| `zq-http-abort` | AbortController for request cancellation |
+| `zq-interceptor-req` | HTTP request interceptor |
+| `zq-interceptor-res` | HTTP response interceptor |
+
+### Utilities
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-debounce` | Debounced function |
+| `zq-throttle` | Throttled function |
+| `zq-pipe` | Left-to-right function composition |
+| `zq-once` | Function that executes only once |
+| `zq-sleep` | Promise that resolves after N ms |
+| `zq-uuid` | Generate a UUID v4 |
+| `zq-escapehtml` | Escape HTML entities |
+| `zq-html-safe` | Tagged template with auto-escaping |
+| `zq-trust` | Mark HTML as trusted (skip escaping) |
+| `zq-camelcase` | kebab-case → camelCase |
+| `zq-kebabcase` | camelCase → kebab-case |
+| `zq-deepclone` | Deep clone an object |
+| `zq-deepmerge` | Recursive object merge |
+| `zq-isequal` | Deep equality comparison |
+| `zq-param` | Serialize object to query string |
+| `zq-parsequery` | Parse query string to object |
+
+### Storage & Event Bus
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-storage-set` | Store value in localStorage |
+| `zq-storage-get` | Get value from localStorage |
+| `zq-session-set` | Store value in sessionStorage |
+| `zq-session-get` | Get value from sessionStorage |
+| `zq-bus-on` | Subscribe to a bus event |
+| `zq-bus-emit` | Emit a bus event |
+| `zq-bus-once` | One-time bus event subscription |
+| `zq-bus-clear` | Remove all bus listeners |
+
+### Global & ESM
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-style` | Dynamically load a global stylesheet |
+| `zq-import` | Import zQuery named exports (ESM) |
+| `zq-noconflict` | Remove `$` from window and return zQuery |
+
+---
+
+## HTML Snippets
+
+### Directives
 
 | Prefix | Description |
 |--------|-------------|
 | `z-model` | Two-way data binding |
+| `z-model-nested` | Nested state binding (`parent.child`) |
+| `z-model-mods` | Binding with modifier (`z-lazy`, `z-trim`, `z-number`) |
+| `z-model-checkbox` | Checkbox with boolean binding |
+| `z-model-radio` | Radio button group |
+| `z-model-number` | Number input |
+| `z-model-select` | Select dropdown |
+| `z-model-textarea` | Textarea with optional lazy modifier |
 | `z-ref` | Element reference |
-| `z-link` | Client-side router link |
-| `@click` / `@submit` / `@input` | Event handler attributes |
-| `zq-form` | Complete form with z-model bindings |
-| `zq-nav` | Navigation bar with z-links |
+| `z-link` | SPA navigation link |
+
+### Event Bindings
+
+| Prefix | Description |
+|--------|-------------|
+| `@click` | Click handler |
+| `@click-args` | Click with arguments |
+| `@click-prevent` | Click with `preventDefault` |
+| `@submit` | Form submit with `preventDefault` |
+| `@input` | Input handler |
+| `@change` | Change handler |
+| `@keydown` | Keydown handler |
+| `@keyup` | Keyup handler |
+| `@event` | Custom event binding |
+| `@event-prevent-stop` | Event with `prevent` + `stop` modifiers |
+
+### Component Templates
+
+| Prefix | Description |
+|--------|-------------|
 | `zq-tag` | Custom component element |
+| `zq-embed` | Embed a component with props |
+| `zq-expr` | Template expression (`{{…}}`) |
+| `zq-if` | Conditional rendering (ternary) |
+| `zq-list` | List rendering (map/join) |
+
+### Forms
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-form` | Complete form with z-model bindings |
+| `zq-select-el` | Select element with z-model |
+| `zq-checkbox` | Checkbox with z-model |
+
+### Layout & Navigation
+
+| Prefix | Description |
+|--------|-------------|
+| `zq-outlet` | Router outlet element |
+| `zq-nav` | Navigation bar with z-links |
 
 ---
 
@@ -63,6 +245,14 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
 | `zquery.enable` | `boolean` | `true` | Enable or disable zQuery IntelliSense |
+
+## Supported Languages
+
+- JavaScript
+- TypeScript
+- JavaScript React (JSX)
+- TypeScript React (TSX)
+- HTML
 
 ## Requirements
 
@@ -73,6 +263,7 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 
 - [zQuery on npm](https://www.npmjs.com/package/zero-query)
 - [zQuery on GitHub](https://github.com/tonywied17/zero-query)
+- [API Reference](https://github.com/tonywied17/zero-query/blob/main/API.md)
 - [Report an Issue](https://github.com/tonywied17/zquery-vs-code/issues)
 
 ## License

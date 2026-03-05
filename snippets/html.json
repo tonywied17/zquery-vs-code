@@ -1,4 +1,7 @@
 {
+
+  "_comment_directives": "──── z-* Directives ────",
+
   "z-model Attribute": {
     "prefix": "z-model",
     "body": [
@@ -20,6 +23,49 @@
     ],
     "description": "zQuery z-model with a modifier (z-lazy, z-trim, z-number)."
   },
+  "z-model (Checkbox)": {
+    "prefix": "z-model-checkbox",
+    "body": [
+      "<label>",
+      "\t<input z-model=\"${1:checked}\" type=\"checkbox\">",
+      "\t${2:Label}",
+      "</label>"
+    ],
+    "description": "zQuery z-model checkbox with boolean binding."
+  },
+  "z-model (Radio Group)": {
+    "prefix": "z-model-radio",
+    "body": [
+      "<label><input z-model=\"${1:selected}\" type=\"radio\" value=\"${2:option1}\"> ${3:Option 1}</label>",
+      "<label><input z-model=\"${1}\" type=\"radio\" value=\"${4:option2}\"> ${5:Option 2}</label>"
+    ],
+    "description": "zQuery z-model radio button group."
+  },
+  "z-model (Number Input)": {
+    "prefix": "z-model-number",
+    "body": [
+      "<input z-model=\"${1:age}\" type=\"number\" min=\"${2:0}\" ${3:max=\"${4:100}\"}>"
+    ],
+    "description": "zQuery z-model with number input (reads as Number automatically)."
+  },
+  "z-model (Select Dropdown)": {
+    "prefix": "z-model-select",
+    "body": [
+      "<select z-model=\"${1:selected}\">",
+      "\t<option value=\"\">${2:-- Choose --}</option>",
+      "\t<option value=\"${3:val1}\">${4:Label 1}</option>",
+      "\t<option value=\"${5:val2}\">${6:Label 2}</option>",
+      "</select>"
+    ],
+    "description": "zQuery z-model select dropdown."
+  },
+  "z-model (Textarea)": {
+    "prefix": "z-model-textarea",
+    "body": [
+      "<textarea z-model=\"${1:content}\" ${2:z-lazy} placeholder=\"${3:Enter text...}\"></textarea>"
+    ],
+    "description": "zQuery z-model textarea with optional lazy modifier."
+  },
   "z-ref Attribute": {
     "prefix": "z-ref",
     "body": [
@@ -34,6 +80,9 @@
     ],
     "description": "zQuery SPA navigation link (intercepted by router, no reload)."
   },
+
+  "_comment_events": "──── @ Event Bindings ────",
+
   "@click Handler": {
     "prefix": "@click",
     "body": [
@@ -90,6 +139,23 @@
     ],
     "description": "zQuery keyup event binding."
   },
+  "@event (Custom)": {
+    "prefix": "@event",
+    "body": [
+      "@${1:event}=\"${2:methodName}\""
+    ],
+    "description": "zQuery custom event binding to a component method."
+  },
+  "@event.prevent.stop": {
+    "prefix": "@event-prevent-stop",
+    "body": [
+      "@${1:click}.prevent.stop=\"${2:methodName}\""
+    ],
+    "description": "zQuery event binding with both preventDefault and stopPropagation."
+  },
+
+  "_comment_templates": "──── Component Templates ────",
+
   "zQuery Component Tag": {
     "prefix": "zq-tag",
     "body": [
@@ -97,6 +163,43 @@
     ],
     "description": "Custom element tag for a zQuery component."
   },
+  "zQuery Component Embed": {
+    "prefix": "zq-embed",
+    "body": [
+      "<${1:my-component} ${2:prop}=\"${3:value}\"></${1}>"
+    ],
+    "description": "Embed a registered zQuery component with props."
+  },
+  "zQuery Template Expression": {
+    "prefix": "zq-expr",
+    "body": [
+      "{{${1:expression}}}"
+    ],
+    "description": "Template expression for external HTML templates ({{…}})."
+  },
+  "zQuery Conditional Rendering": {
+    "prefix": "zq-if",
+    "body": [
+      "\\${${1:condition} ? `",
+      "\t${2:<!-- shown when true -->}",
+      "` : `",
+      "\t${3:<!-- shown when false -->}",
+      "`}"
+    ],
+    "description": "Ternary conditional rendering in component render template."
+  },
+  "zQuery List Rendering": {
+    "prefix": "zq-list",
+    "body": [
+      "\\${${1:this.state.items}.map(${2:item} => `",
+      "\t<${3:div} class=\"${4:item}\">\\${${2}.${5:name}}</${3}>",
+      "`).join('')}"
+    ],
+    "description": "Map over array to render a list in component template."
+  },
+
+  "_comment_form": "──── Forms ────",
+
   "zQuery Form (z-model)": {
     "prefix": "zq-form",
     "body": [
@@ -110,8 +213,8 @@
     ],
     "description": "Form template with z-model bindings and submit handler."
   },
-  "zQuery Select (z-model)": {
-    "prefix": "zq-select",
+  "zQuery Select Element (z-model)": {
+    "prefix": "zq-select-el",
     "body": [
       "<select z-model=\"${1:selected}\">",
       "\t<option value=\"${2:opt1}\">${3:Option 1}</option>",
@@ -130,6 +233,9 @@
     ],
     "description": "Checkbox with z-model boolean binding."
   },
+
+  "_comment_layout": "──── Layout & Navigation ────",
+
   "zQuery Router Outlet": {
     "prefix": "zq-outlet",
     "body": [
@@ -147,12 +253,5 @@
       "</nav>"
     ],
     "description": "Navigation bar with z-link router links."
-  },
-  "zQuery Template Expression": {
-    "prefix": "zq-expr",
-    "body": [
-      "{{${1:expression}}}"
-    ],
-    "description": "Template expression for external HTML templates ({{…}})."
   }
 }

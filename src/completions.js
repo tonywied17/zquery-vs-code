@@ -35,7 +35,7 @@ function toCompletion(entry, sortPrefix) {
 }
 
 
-// ── JavaScript / TypeScript provider ───────────────────────────────────────
+// -- JavaScript / TypeScript provider ---------------------------------------
 
 const JS_SELECTOR = [
   { language: 'javascript', scheme: 'file' },
@@ -133,7 +133,7 @@ const jsComponentKeyProvider = {
 };
 
 
-// ── HTML directive provider ────────────────────────────────────────────────
+// -- HTML directive provider ------------------------------------------------
 
 const HTML_SELECTOR = [
   { language: 'html', scheme: 'file' },
@@ -205,7 +205,7 @@ function isInsideTag(prefix) {
 }
 
 
-// ── Registration ───────────────────────────────────────────────────────────
+// -- Registration -----------------------------------------------------------
 
 function registerCompletionProviders(context) {
   context.subscriptions.push(

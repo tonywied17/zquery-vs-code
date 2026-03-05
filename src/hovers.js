@@ -6,7 +6,7 @@ const vscode = require('vscode');
 const docs = require('./docs');
 
 
-// ── Build lookup maps ──────────────────────────────────────────────────────
+// -- Build lookup maps ------------------------------------------------------
 
 /** @type {Map<string, {detail:string, documentation:string}>} */
 const dollarMap = new Map();
@@ -45,7 +45,7 @@ for (const entry of [...docs.zDirectives, ...docs.eventDirectives]) {
 }
 
 
-// ── Helpers ────────────────────────────────────────────────────────────────
+// -- Helpers ----------------------------------------------------------------
 
 /**
  * Build a MarkdownString hover from a docs entry.
@@ -89,7 +89,7 @@ function getExtendedWord(document, position) {
 }
 
 
-// ── JavaScript / TypeScript hover ──────────────────────────────────────────
+// -- JavaScript / TypeScript hover ------------------------------------------
 
 const JS_SELECTOR = [
   { language: 'javascript', scheme: 'file' },
@@ -149,7 +149,7 @@ const jsHoverProvider = {
 };
 
 
-// ── HTML / template hover ──────────────────────────────────────────────────
+// -- HTML / template hover --------------------------------------------------
 
 const HTML_SELECTOR = [
   { language: 'html', scheme: 'file' },
@@ -199,7 +199,7 @@ const htmlHoverProvider = {
 };
 
 
-// ── Registration ───────────────────────────────────────────────────────────
+// -- Registration -----------------------------------------------------------
 
 function registerHoverProviders(context) {
   context.subscriptions.push(

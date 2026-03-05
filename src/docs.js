@@ -4,10 +4,25 @@
 
 /** @type {'Function'|'Method'|'Property'|'Variable'|'Module'|'Field'|'Value'|'Snippet'} */
 
-// ── $ namespace methods ────────────────────────────────────────────────────
+// -- $ namespace methods ----------------------------------------------------
 
 const dollarMethods = [
-  // ── Selectors ───────────────────────────────────────────────────────────
+  // -- Selectors -----------------------------------------------------------
+  {
+    name: '$',
+    kind: 'Function',
+    detail: '(selector, context?) → Element | null',
+    documentation:
+      'CSS selector — returns the first matching element via `querySelector`.\n' +
+      'Also accepts elements, NodeLists, HTML strings, and functions (DOM-ready).\n\n' +
+      '```js\n' +
+      "const email = $('input[name=\"email\"]');  // first matching input\n" +
+      "const nested = $('li', '#todo-list');     // scoped to parent\n" +
+      "const el = $('<div class=\"alert\">Hi</div>'); // create from HTML\n" +
+      '$(() => console.log(\'DOM ready\'));        // DOM-ready callback\n' +
+      '```',
+    insertText: "('$1')",
+  },
   {
     name: 'all',
     kind: 'Function',
@@ -111,7 +126,7 @@ const dollarMethods = [
     insertText: 'fn',
   },
 
-  // ── Reactive ────────────────────────────────────────────────────────────
+  // -- Reactive ------------------------------------------------------------
   {
     name: 'reactive',
     kind: 'Function',
@@ -149,7 +164,7 @@ const dollarMethods = [
     insertText: 'effect(() => {\n\t$1\n})',
   },
 
-  // ── Components ──────────────────────────────────────────────────────────
+  // -- Components ----------------------------------------------------------
   {
     name: 'component',
     kind: 'Function',
@@ -209,7 +224,7 @@ const dollarMethods = [
     insertText: "style('${1:path/to/style.css}')",
   },
 
-  // ── Router ──────────────────────────────────────────────────────────────
+  // -- Router --------------------------------------------------------------
   {
     name: 'router',
     kind: 'Function',
@@ -227,7 +242,7 @@ const dollarMethods = [
     insertText: 'getRouter()',
   },
 
-  // ── Store ───────────────────────────────────────────────────────────────
+  // -- Store ---------------------------------------------------------------
   {
     name: 'store',
     kind: 'Function',
@@ -245,7 +260,7 @@ const dollarMethods = [
     insertText: "getStore(${1})",
   },
 
-  // ── HTTP ────────────────────────────────────────────────────────────────
+  // -- HTTP ----------------------------------------------------------------
   {
     name: 'http',
     kind: 'Module',
@@ -295,7 +310,7 @@ const dollarMethods = [
     insertText: "delete('${1:/api/endpoint}')",
   },
 
-  // ── Utilities: Functions ────────────────────────────────────────────────
+  // -- Utilities: Functions ------------------------------------------------
   {
     name: 'debounce',
     kind: 'Function',
@@ -340,7 +355,7 @@ const dollarMethods = [
     insertText: 'sleep(${1:1000})',
   },
 
-  // ── Utilities: Strings ──────────────────────────────────────────────────
+  // -- Utilities: Strings --------------------------------------------------
   {
     name: 'escapeHtml',
     kind: 'Function',
@@ -388,7 +403,7 @@ const dollarMethods = [
     insertText: "kebabCase('$1')",
   },
 
-  // ── Utilities: Objects ──────────────────────────────────────────────────
+  // -- Utilities: Objects --------------------------------------------------
   {
     name: 'deepClone',
     kind: 'Function',
@@ -411,7 +426,7 @@ const dollarMethods = [
     insertText: 'isEqual(${1}, ${2})',
   },
 
-  // ── Utilities: URL ──────────────────────────────────────────────────────
+  // -- Utilities: URL ------------------------------------------------------
   {
     name: 'param',
     kind: 'Function',
@@ -427,7 +442,7 @@ const dollarMethods = [
     insertText: "parseQuery('$1')",
   },
 
-  // ── Utilities: Storage ──────────────────────────────────────────────────
+  // -- Utilities: Storage --------------------------------------------------
   {
     name: 'storage',
     kind: 'Module',
@@ -447,7 +462,7 @@ const dollarMethods = [
     insertText: 'session',
   },
 
-  // ── Utilities: Event Bus ────────────────────────────────────────────────
+  // -- Utilities: Event Bus ------------------------------------------------
   {
     name: 'bus',
     kind: 'Module',
@@ -458,7 +473,7 @@ const dollarMethods = [
     insertText: 'bus',
   },
 
-  // ── Meta ────────────────────────────────────────────────────────────────
+  // -- Meta ----------------------------------------------------------------
   {
     name: 'version',
     kind: 'Property',
@@ -483,7 +498,7 @@ const dollarMethods = [
 ];
 
 
-// ── $.http sub-namespace ───────────────────────────────────────────────────
+// -- $.http sub-namespace ---------------------------------------------------
 
 const httpMethods = [
   {
@@ -567,7 +582,7 @@ const httpMethods = [
 ];
 
 
-// ── $.storage / $.session sub-namespace ────────────────────────────────────
+// -- $.storage / $.session sub-namespace ------------------------------------
 
 const storageMethods = [
   {
@@ -601,7 +616,7 @@ const storageMethods = [
 ];
 
 
-// ── $.bus sub-namespace ────────────────────────────────────────────────────
+// -- $.bus sub-namespace ----------------------------------------------------
 
 const busMethods = [
   {
@@ -642,83 +657,83 @@ const busMethods = [
 ];
 
 
-// ── ZQueryCollection methods ───────────────────────────────────────────────
+// -- ZQueryCollection methods -----------------------------------------------
 
 const collectionMethods = [
   // Iteration
-  { name: 'each', kind: 'Method', detail: '(fn(index, element)) → this', documentation: 'Iterate elements. `this` inside callback is the element.' },
-  { name: 'map', kind: 'Method', detail: '(fn(index, element)) → Array', documentation: 'Map over elements, returns plain array.' },
-  { name: 'first', kind: 'Method', detail: '() → Element | null', documentation: 'First raw element.' },
-  { name: 'last', kind: 'Method', detail: '() → Element | null', documentation: 'Last raw element.' },
-  { name: 'eq', kind: 'Method', detail: '(index) → ZQueryCollection', documentation: 'New collection with element at index.' },
-  { name: 'toArray', kind: 'Method', detail: '() → Element[]', documentation: 'Convert to plain array.' },
+  { name: 'each', kind: 'Method', detail: '(fn(index, element)) → this', documentation: 'Iterate elements. `this` inside callback is the element.', insertText: 'each((i, el) => {\n\t$1\n})' },
+  { name: 'map', kind: 'Method', detail: '(fn(index, element)) → Array', documentation: 'Map over elements, returns plain array.', insertText: 'map((i, el) => $1)' },
+  { name: 'first', kind: 'Method', detail: '() → Element | null', documentation: 'First raw element.', insertText: 'first()' },
+  { name: 'last', kind: 'Method', detail: '() → Element | null', documentation: 'Last raw element.', insertText: 'last()' },
+  { name: 'eq', kind: 'Method', detail: '(index) → ZQueryCollection', documentation: 'New collection with element at index.', insertText: 'eq(${1:0})' },
+  { name: 'toArray', kind: 'Method', detail: '() → Element[]', documentation: 'Convert to plain array.', insertText: 'toArray()' },
   // Traversal
-  { name: 'find', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Descendants matching selector.' },
-  { name: 'parent', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Unique parent elements.' },
-  { name: 'closest', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Nearest ancestor matching selector.' },
-  { name: 'children', kind: 'Method', detail: '(selector?) → ZQueryCollection', documentation: 'Direct children, optionally filtered.' },
-  { name: 'siblings', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'All sibling elements.' },
-  { name: 'next', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Next sibling of each element.' },
-  { name: 'prev', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Previous sibling of each element.' },
+  { name: 'find', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Descendants matching selector.', insertText: "find('$1')" },
+  { name: 'parent', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Unique parent elements.', insertText: 'parent()' },
+  { name: 'closest', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Nearest ancestor matching selector.', insertText: "closest('$1')" },
+  { name: 'children', kind: 'Method', detail: '(selector?) → ZQueryCollection', documentation: 'Direct children, optionally filtered.', insertText: 'children($1)' },
+  { name: 'siblings', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'All sibling elements.', insertText: 'siblings()' },
+  { name: 'next', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Next sibling of each element.', insertText: 'next()' },
+  { name: 'prev', kind: 'Method', detail: '() → ZQueryCollection', documentation: 'Previous sibling of each element.', insertText: 'prev()' },
   // Filtering
-  { name: 'filter', kind: 'Method', detail: '(selector | fn) → ZQueryCollection', documentation: 'Keep matching elements.' },
-  { name: 'not', kind: 'Method', detail: '(selector | fn) → ZQueryCollection', documentation: 'Remove matching elements.' },
-  { name: 'has', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Keep elements that have a matching descendant.' },
+  { name: 'filter', kind: 'Method', detail: '(selector | fn) → ZQueryCollection', documentation: 'Keep matching elements.', insertText: "filter('$1')" },
+  { name: 'not', kind: 'Method', detail: '(selector | fn) → ZQueryCollection', documentation: 'Remove matching elements.', insertText: "not('$1')" },
+  { name: 'has', kind: 'Method', detail: '(selector) → ZQueryCollection', documentation: 'Keep elements that have a matching descendant.', insertText: "has('$1')" },
   // Classes
-  { name: 'addClass', kind: 'Method', detail: '(...names) → this', documentation: 'Add one or more classes (space-separated strings accepted).' },
-  { name: 'removeClass', kind: 'Method', detail: '(...names) → this', documentation: 'Remove one or more classes.' },
-  { name: 'toggleClass', kind: 'Method', detail: '(name, force?) → this', documentation: 'Toggle a class. Optional `force` boolean.' },
-  { name: 'hasClass', kind: 'Method', detail: '(name) → boolean', documentation: 'Check if first element has the given class.' },
+  { name: 'addClass', kind: 'Method', detail: '(...names) → this', documentation: 'Add one or more classes (space-separated strings accepted).', insertText: "addClass('$1')" },
+  { name: 'removeClass', kind: 'Method', detail: '(...names) → this', documentation: 'Remove one or more classes.', insertText: "removeClass('$1')" },
+  { name: 'toggleClass', kind: 'Method', detail: '(name, force?) → this', documentation: 'Toggle a class. Optional `force` boolean.', insertText: "toggleClass('$1')" },
+  { name: 'hasClass', kind: 'Method', detail: '(name) → boolean', documentation: 'Check if first element has the given class.', insertText: "hasClass('$1')" },
   // Attributes
-  { name: 'attr', kind: 'Method', detail: '(name) | (name, value) → string | this', documentation: 'Get or set attribute.' },
-  { name: 'removeAttr', kind: 'Method', detail: '(name) → this', documentation: 'Remove attribute from all elements.' },
-  { name: 'prop', kind: 'Method', detail: '(name) | (name, value) → any | this', documentation: 'Get or set JS property.' },
-  { name: 'data', kind: 'Method', detail: '(key?) | (key, value) → any | this', documentation: 'Get/set data attribute. JSON auto-parsed.' },
+  { name: 'attr', kind: 'Method', detail: '(name) | (name, value) → string | this', documentation: 'Get or set attribute.', insertText: "attr('$1')" },
+  { name: 'removeAttr', kind: 'Method', detail: '(name) → this', documentation: 'Remove attribute from all elements.', insertText: "removeAttr('$1')" },
+  { name: 'prop', kind: 'Method', detail: '(name) | (name, value) → any | this', documentation: 'Get or set JS property.', insertText: "prop('$1')" },
+  { name: 'data', kind: 'Method', detail: '(key?) | (key, value) → any | this', documentation: 'Get/set data attribute. JSON auto-parsed.', insertText: "data('$1')" },
   // CSS
-  { name: 'css', kind: 'Method', detail: '(prop) | ({ styles }) → string | this', documentation: 'Get computed style or set inline styles.' },
-  { name: 'width', kind: 'Method', detail: '() → number', documentation: 'First element\'s width (from `getBoundingClientRect`).' },
-  { name: 'height', kind: 'Method', detail: '() → number', documentation: 'First element\'s height.' },
-  { name: 'offset', kind: 'Method', detail: '() → { top, left, width, height }', documentation: 'Position relative to document.' },
-  { name: 'position', kind: 'Method', detail: '() → { top, left }', documentation: 'Position relative to offset parent.' },
+  { name: 'css', kind: 'Method', detail: '(prop) | ({ styles }) → string | this', documentation: 'Get computed style or set inline styles.', insertText: 'css({ $1 })' },
+  { name: 'width', kind: 'Method', detail: '() → number', documentation: 'First element\'s width (from `getBoundingClientRect`).', insertText: 'width()' },
+  { name: 'height', kind: 'Method', detail: '() → number', documentation: 'First element\'s height.', insertText: 'height()' },
+  { name: 'offset', kind: 'Method', detail: '() → { top, left, width, height }', documentation: 'Position relative to document.', insertText: 'offset()' },
+  { name: 'position', kind: 'Method', detail: '() → { top, left }', documentation: 'Position relative to offset parent.', insertText: 'position()' },
   // Content
-  { name: 'html', kind: 'Method', detail: '() | (content) → string | this', documentation: 'Get or set innerHTML.' },
-  { name: 'text', kind: 'Method', detail: '() | (content) → string | this', documentation: 'Get or set textContent.' },
-  { name: 'val', kind: 'Method', detail: '() | (value) → string | this', documentation: 'Get or set input value.' },
+  { name: 'html', kind: 'Method', detail: '() | (content) → string | this', documentation: 'Get or set innerHTML.', insertText: 'html($1)' },
+  { name: 'text', kind: 'Method', detail: '() | (content) → string | this', documentation: 'Get or set textContent.', insertText: 'text($1)' },
+  { name: 'val', kind: 'Method', detail: '() | (value) → string | this', documentation: 'Get or set input value.', insertText: 'val($1)' },
   // DOM Manipulation
-  { name: 'append', kind: 'Method', detail: '(content) → this', documentation: 'Insert content at end.' },
-  { name: 'prepend', kind: 'Method', detail: '(content) → this', documentation: 'Insert content at beginning.' },
-  { name: 'after', kind: 'Method', detail: '(content) → this', documentation: 'Insert content after each element.' },
-  { name: 'before', kind: 'Method', detail: '(content) → this', documentation: 'Insert content before each element.' },
-  { name: 'wrap', kind: 'Method', detail: '(wrapper) → this', documentation: 'Wrap each element with HTML or Node.' },
-  { name: 'remove', kind: 'Method', detail: '() → this', documentation: 'Remove all elements from DOM.' },
-  { name: 'empty', kind: 'Method', detail: '() → this', documentation: 'Clear innerHTML of all elements.' },
-  { name: 'clone', kind: 'Method', detail: '(deep?) → ZQueryCollection', documentation: 'Clone elements (default: deep).' },
-  { name: 'replaceWith', kind: 'Method', detail: '(content) → this', documentation: 'Replace elements with new content.' },
+  { name: 'append', kind: 'Method', detail: '(content) → this', documentation: 'Insert content at end.', insertText: 'append($1)' },
+  { name: 'prepend', kind: 'Method', detail: '(content) → this', documentation: 'Insert content at beginning.', insertText: 'prepend($1)' },
+  { name: 'after', kind: 'Method', detail: '(content) → this', documentation: 'Insert content after each element.', insertText: 'after($1)' },
+  { name: 'before', kind: 'Method', detail: '(content) → this', documentation: 'Insert content before each element.', insertText: 'before($1)' },
+  { name: 'wrap', kind: 'Method', detail: '(wrapper) → this', documentation: 'Wrap each element with HTML or Node.', insertText: "wrap('$1')" },
+  { name: 'remove', kind: 'Method', detail: '() → this', documentation: 'Remove all elements from DOM.', insertText: 'remove()' },
+  { name: 'empty', kind: 'Method', detail: '() → this', documentation: 'Clear innerHTML of all elements.', insertText: 'empty()' },
+  { name: 'clone', kind: 'Method', detail: '(deep?) → ZQueryCollection', documentation: 'Clone elements (default: deep).', insertText: 'clone()' },
+  { name: 'replaceWith', kind: 'Method', detail: '(content) → this', documentation: 'Replace elements with new content.', insertText: 'replaceWith($1)' },
   // Visibility
-  { name: 'show', kind: 'Method', detail: '(display?) → this', documentation: 'Show elements. Optional display value.' },
-  { name: 'hide', kind: 'Method', detail: '() → this', documentation: 'Set `display: none`.' },
-  { name: 'toggle', kind: 'Method', detail: '(display?) → this', documentation: 'Toggle visibility.' },
+  { name: 'show', kind: 'Method', detail: '(display?) → this', documentation: 'Show elements. Optional display value.', insertText: 'show()' },
+  { name: 'hide', kind: 'Method', detail: '() → this', documentation: 'Set `display: none`.', insertText: 'hide()' },
+  { name: 'toggle', kind: 'Method', detail: '(display?) → this', documentation: 'Toggle visibility.', insertText: 'toggle()' },
   // Events
-  { name: 'on', kind: 'Method', detail: '(events, handler) | (events, selector, handler) → this', documentation: 'Attach event handler. Supports delegation and space-separated events.' },
-  { name: 'off', kind: 'Method', detail: '(events, handler) → this', documentation: 'Remove event handler.' },
-  { name: 'one', kind: 'Method', detail: '(event, handler) → this', documentation: 'One-time event handler.' },
-  { name: 'trigger', kind: 'Method', detail: '(event, detail?) → this', documentation: 'Dispatch CustomEvent with optional detail.' },
-  { name: 'click', kind: 'Method', detail: '(fn?) → this', documentation: 'Attach click handler or trigger click.' },
-  { name: 'submit', kind: 'Method', detail: '(fn?) → this', documentation: 'Attach submit handler or trigger submit.' },
-  { name: 'focus', kind: 'Method', detail: '() → this', documentation: 'Focus first element.' },
-  { name: 'blur', kind: 'Method', detail: '() → this', documentation: 'Blur first element.' },
+  { name: 'on', kind: 'Method', detail: '(events, handler) | (events, selector, handler) → this', documentation: 'Attach event handler. Supports delegation and space-separated events.', insertText: "on('${1:click}', (e) => {\n\t$2\n})" },
+  { name: 'off', kind: 'Method', detail: '(events, handler) → this', documentation: 'Remove event handler.', insertText: "off('$1', $2)" },
+  { name: 'one', kind: 'Method', detail: '(event, handler) → this', documentation: 'One-time event handler.', insertText: "one('$1', (e) => {\n\t$2\n})" },
+  { name: 'trigger', kind: 'Method', detail: '(event, detail?) → this', documentation: 'Dispatch CustomEvent with optional detail.', insertText: "trigger('$1')" },
+  { name: 'click', kind: 'Method', detail: '(fn?) → this', documentation: 'Attach click handler or trigger click.', insertText: 'click($1)' },
+  { name: 'submit', kind: 'Method', detail: '(fn?) → this', documentation: 'Attach submit handler or trigger submit.', insertText: 'submit($1)' },
+  { name: 'focus', kind: 'Method', detail: '() → this', documentation: 'Focus first element.', insertText: 'focus()' },
+  { name: 'blur', kind: 'Method', detail: '() → this', documentation: 'Blur first element.', insertText: 'blur()' },
   // Animation
-  { name: 'animate', kind: 'Method', detail: '(props, duration?, easing?) → Promise<ZQueryCollection>', documentation: 'CSS transition animation.' },
-  { name: 'fadeIn', kind: 'Method', detail: '(duration?) → Promise<ZQueryCollection>', documentation: 'Fade in (opacity 0→1). Default 300 ms.' },
-  { name: 'fadeOut', kind: 'Method', detail: '(duration?) → Promise<ZQueryCollection>', documentation: 'Fade out (opacity 1→0) then hide. Default 300 ms.' },
-  { name: 'slideToggle', kind: 'Method', detail: '(duration?) → this', documentation: 'Toggle height with slide animation.' },
+  { name: 'animate', kind: 'Method', detail: '(props, duration?, easing?) → Promise<ZQueryCollection>', documentation: 'CSS transition animation. Returns a Promise.', insertText: "animate({ $1 }, ${2:300})" },
+  { name: 'fadeIn', kind: 'Method', detail: '(duration?) → Promise<ZQueryCollection>', documentation: 'Fade in (opacity 0→1). Default 300 ms.', insertText: 'fadeIn(${1:300})' },
+  { name: 'fadeOut', kind: 'Method', detail: '(duration?) → Promise<ZQueryCollection>', documentation: 'Fade out (opacity 1→0) then hide. Default 300 ms.', insertText: 'fadeOut(${1:300})' },
+  { name: 'slideToggle', kind: 'Method', detail: '(duration?) → this', documentation: 'Toggle height with slide animation.', insertText: 'slideToggle(${1:300})' },
   // Form
-  { name: 'serialize', kind: 'Method', detail: '() → string', documentation: 'URL-encoded form data string.' },
-  { name: 'serializeObject', kind: 'Method', detail: '() → object', documentation: 'Form data as key/value object. Duplicate keys become arrays.' },
+  { name: 'serialize', kind: 'Method', detail: '() → string', documentation: 'URL-encoded form data string.', insertText: 'serialize()' },
+  { name: 'serializeObject', kind: 'Method', detail: '() → object', documentation: 'Form data as key/value object. Duplicate keys become arrays.', insertText: 'serializeObject()' },
 ];
 
 
-// ── HTML directives (z-*) ──────────────────────────────────────────────────
+// -- HTML directives (z-*) --------------------------------------------------
 
 const zDirectives = [
   {
@@ -774,7 +789,7 @@ const zDirectives = [
 ];
 
 
-// ── HTML event directives (@event) ─────────────────────────────────────────
+// -- HTML event directives (@event) -----------------------------------------
 
 const eventDirectives = [
   {
@@ -892,14 +907,14 @@ const eventDirectives = [
 ];
 
 
-// ── Component definition keys (for inside $.component({…})) ────────────────
+// -- Component definition keys (for inside $.component({…})) ----------------
 
 const componentKeys = [
-  { name: 'state', kind: 'Property', detail: 'object | () => object', documentation: 'Initial reactive state. Function form recommended for reusability.' },
-  { name: 'render', kind: 'Method', detail: '() → string', documentation: 'Returns HTML string. Called on every state change. `this` is the component instance.' },
-  { name: 'styles', kind: 'Property', detail: 'string', documentation: 'CSS string — automatically scoped to this component\'s root element.' },
-  { name: 'templateUrl', kind: 'Property', detail: 'string | string[] | { key: url }', documentation: 'URL to external HTML template file(s).' },
-  { name: 'styleUrl', kind: 'Property', detail: 'string | string[]', documentation: 'URL(s) to external CSS file(s). Fetched and scoped automatically.' },
+  { name: 'state', kind: 'Property', detail: 'object | () => object', documentation: 'Initial reactive state. Function form recommended for reusability.', insertText: 'state: () => ({ $1 }),' },
+  { name: 'render', kind: 'Method', detail: '() → string', documentation: 'Returns HTML string. Called on every state change. `this` is the component instance.', insertText: 'render() {\n\treturn `$1`;\n},' },
+  { name: 'styles', kind: 'Property', detail: 'string', documentation: 'CSS string — automatically scoped to this component\'s root element.', insertText: 'styles: `\n\t$1\n`,' },
+  { name: 'templateUrl', kind: 'Property', detail: 'string | string[] | { key: url }', documentation: 'URL to external HTML template file(s). If `render()` is also defined, `render()` takes priority.', insertText: "templateUrl: '$1'," },
+  { name: 'styleUrl', kind: 'Property', detail: 'string | string[]', documentation: 'URL(s) to external CSS file(s). Fetched and scoped automatically.', insertText: "styleUrl: '$1'," },
   {
     name: 'pages',
     kind: 'Property',
@@ -913,12 +928,13 @@ const componentKeys = [
       '- `this.activePage` — current page id from route param\n' +
       '- `this.templates` — `{ id: \'…html…\' }` keyed template map\n\n' +
       '**Interactivity:** Page HTML is static content. To add interactive widgets, embed a registered component tag (e.g. `<my-widget></my-widget>`) inside the page HTML — the component system initializes it automatically.',
+    insertText: "pages: {\n\tdir:     '$1',\n\tparam:   '$2',\n\tdefault: '$3',\n\titems: [\n\t\t'$3',\n\t\t$4\n\t],\n},",
   },
-  { name: 'base', kind: 'Property', detail: 'string', documentation: 'Override for the base path used to resolve relative `templateUrl`, `styleUrl`, and `pages.dir` URLs. Normally auto-detected from the component file.' },
-  { name: 'init', kind: 'Method', detail: '() → void', documentation: 'Called before first render (during construction).' },
-  { name: 'mounted', kind: 'Method', detail: '() → void', documentation: 'Called once after first render and DOM insertion.' },
-  { name: 'updated', kind: 'Method', detail: '() → void', documentation: 'Called after every subsequent re-render.' },
-  { name: 'destroyed', kind: 'Method', detail: '() → void', documentation: 'Called when the component is destroyed. Clean up here.' },
+  { name: 'base', kind: 'Property', detail: 'string', documentation: 'Override for the base path used to resolve relative `templateUrl`, `styleUrl`, and `pages.dir` URLs. Normally auto-detected from the component file.', insertText: "base: '$1'," },
+  { name: 'init', kind: 'Method', detail: '() → void', documentation: 'Called before first render (during construction).', insertText: 'init() {\n\t$1\n},' },
+  { name: 'mounted', kind: 'Method', detail: '() → void', documentation: 'Called once after first render and DOM insertion.', insertText: 'mounted() {\n\t$1\n},' },
+  { name: 'updated', kind: 'Method', detail: '() → void', documentation: 'Called after every subsequent re-render.', insertText: 'updated() {\n\t$1\n},' },
+  { name: 'destroyed', kind: 'Method', detail: '() → void', documentation: 'Called when the component is destroyed. Clean up here.', insertText: 'destroyed() {\n\t$1\n},' },
 ];
 
 
