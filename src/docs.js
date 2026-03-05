@@ -83,11 +83,23 @@ const dollarMethods = [
   {
     name: 'on',
     kind: 'Function',
-    detail: '(event, selector, handler) → void',
+    detail: '(event, selector, handler) | (event, handler) → void',
     documentation:
-      'Global event delegation on `document`.\n\n' +
-      "```js\n$.on('click', '.nav-link', function(e) {\n  console.log(this.href);\n});\n```",
+      'Global event delegation on `document`, or direct event listener when called with two arguments.\n\n' +
+      '**Delegated (3-arg)** — listens on `document`, fires when a matching descendant is the target:\n' +
+      "```js\n$.on('click', '.nav-link', function(e) {\n  console.log(this.href);\n});\n```\n\n" +
+      '**Direct (2-arg)** — attaches directly to `document` (ideal for `keydown`, `resize`, etc.):\n' +
+      "```js\n$.on('keydown', (e) => {\n  if (e.key === 'Escape') closeModal();\n});\n```",
     insertText: "on('${1:click}', '${2:selector}', function(e) {\n\t$3\n})",
+  },
+  {
+    name: 'off',
+    kind: 'Function',
+    detail: '(event, handler) → void',
+    documentation:
+      'Remove a direct global event listener previously attached with the 2-arg `$.on(event, handler)`.\n\n' +
+      "```js\nfunction onKey(e) { console.log(e.key); }\n$.on('keydown', onKey);\n$.off('keydown', onKey); // removed\n```",
+    insertText: "off('${1:event}', ${2:handler})",
   },
   {
     name: 'fn',

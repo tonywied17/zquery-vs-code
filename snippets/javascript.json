@@ -288,7 +288,23 @@
       "\t${3}",
       "});"
     ],
-    "description": "Global event delegation on document."
+    "description": "Global delegated event listener on document (3-arg form)."
+  },
+  "zQuery Direct Event Listener": {
+    "prefix": "zq-on-direct",
+    "body": [
+      "$.on('${1:keydown}', (e) => {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "Direct global event listener on document (2-arg form — keydown, resize, etc.)."
+  },
+  "zQuery Remove Global Listener": {
+    "prefix": "zq-off",
+    "body": [
+      "$.off('${1:event}', ${2:handler});"
+    ],
+    "description": "Remove a direct global event listener added with $.on(event, handler)."
   },
   "zQuery Style Loader": {
     "prefix": "zq-style",
