@@ -900,8 +900,21 @@ const componentKeys = [
   { name: 'styles', kind: 'Property', detail: 'string', documentation: 'CSS string — automatically scoped to this component\'s root element.' },
   { name: 'templateUrl', kind: 'Property', detail: 'string | string[] | { key: url }', documentation: 'URL to external HTML template file(s).' },
   { name: 'styleUrl', kind: 'Property', detail: 'string | string[]', documentation: 'URL(s) to external CSS file(s). Fetched and scoped automatically.' },
-  { name: 'pages', kind: 'Property', detail: 'PagesConfig', documentation: 'Declarative multi-page config with `dir`, `param`, `default`, `items`.' },
-  { name: 'base', kind: 'Property', detail: 'string', documentation: 'Override for the base path used to resolve relative URLs.' },
+  {
+    name: 'pages',
+    kind: 'Property',
+    detail: '{ dir, param, default, ext?, items }',
+    documentation:
+      'Declarative multi-page config with **lazy loading**.\n\n' +
+      'Only the active page is fetched on first render — remaining pages are prefetched in the background for instant navigation.\n\n' +
+      '```js\npages: {\n  dir:     \'pages\',\n  param:   \'section\',\n  default: \'getting-started\',\n  items: [\n    \'getting-started\',\n    { id: \'http\', label: \'HTTP Client\' },\n  ],\n}\n```\n\n' +
+      '**Exposes on `this`:**\n' +
+      '- `this.pages` — `Array<{id, label}>` normalized metadata\n' +
+      '- `this.activePage` — current page id from route param\n' +
+      '- `this.templates` — `{ id: \'…html…\' }` keyed template map\n\n' +
+      '**Interactivity:** Page HTML is static content. To add interactive widgets, embed a registered component tag (e.g. `<my-widget></my-widget>`) inside the page HTML — the component system initializes it automatically.',
+  },
+  { name: 'base', kind: 'Property', detail: 'string', documentation: 'Override for the base path used to resolve relative `templateUrl`, `styleUrl`, and `pages.dir` URLs. Normally auto-detected from the component file.' },
   { name: 'init', kind: 'Method', detail: '() → void', documentation: 'Called before first render (during construction).' },
   { name: 'mounted', kind: 'Method', detail: '() → void', documentation: 'Called once after first render and DOM insertion.' },
   { name: 'updated', kind: 'Method', detail: '() → void', documentation: 'Called after every subsequent re-render.' },

@@ -34,6 +34,11 @@ for (const entry of docs.collectionMethods) {
   collectionMap.set(entry.name, entry);
 }
 
+const componentKeyMap = new Map();
+for (const entry of docs.componentKeys) {
+  componentKeyMap.set(entry.name, entry);
+}
+
 const directiveMap = new Map();
 for (const entry of [...docs.zDirectives, ...docs.eventDirectives]) {
   directiveMap.set(entry.name, entry);
@@ -125,6 +130,18 @@ const jsHoverProvider = {
     const dollarMatch = word.match(/(?:\$|zQuery)\.(\w+)$/);
     if (dollarMatch && dollarMap.has(dollarMatch[1])) {
       return buildHover(dollarMap.get(dollarMatch[1]), '$');
+    }
+
+    // Component definition keys (pages, state, render, etc.)
+    // Detect if cursor is on a key inside a $.component({…}) block
+    if (componentKeyMap.has(word)) {
+      const text = document.getText(new vscode.Range(
+        Math.max(0, position.line - 50), 0,
+        position.line, position.character
+      ));
+      if (/\$\.component\s*\(\s*['"][^'"]+['"]/.test(text)) {
+        return buildHover(componentKeyMap.get(word), 'ComponentDefinition');
+      }
     }
 
     return undefined;

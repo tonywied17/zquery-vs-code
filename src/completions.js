@@ -107,6 +107,31 @@ const jsCollectionProvider = {
   },
 };
 
+/**
+ * Provides component definition key completions inside $.component({…}).
+ * Triggers on property names for: state, render, pages, styles, etc.
+ */
+const jsComponentKeyProvider = {
+  provideCompletionItems(document, position) {
+    if (!vscode.workspace.getConfiguration('zquery').get('enable', true)) return;
+
+    // Scan backwards to see if we're inside a $.component('…', { … }) block
+    const text = document.getText(new vscode.Range(
+      Math.max(0, position.line - 40), 0,
+      position.line, position.character
+    ));
+    if (!/\$\.component\s*\(\s*['"][^'"]+['"]/.test(text)) return;
+
+    // Only suggest if the cursor looks like it's at a key position
+    // (start of a line inside the object, after a comma/opening brace)
+    const linePrefix = document.lineAt(position).text.substring(0, position.character).trimStart();
+    // Skip if we're clearly inside a value (after a colon, inside a string, etc.)
+    if (/:\s*\S/.test(linePrefix)) return;
+
+    return docs.componentKeys.map((e, i) => toCompletion(e, String(i).padStart(2, '0')));
+  },
+};
+
 
 // ── HTML directive provider ────────────────────────────────────────────────
 
@@ -186,6 +211,7 @@ function registerCompletionProviders(context) {
   context.subscriptions.push(
     vscode.languages.registerCompletionItemProvider(JS_SELECTOR, jsDotProvider, '.'),
     vscode.languages.registerCompletionItemProvider(JS_SELECTOR, jsCollectionProvider, '.'),
+    vscode.languages.registerCompletionItemProvider(JS_SELECTOR, jsComponentKeyProvider),
     vscode.languages.registerCompletionItemProvider(HTML_SELECTOR, htmlDirectiveProvider, '@', '-'),
   );
 }

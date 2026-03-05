@@ -72,7 +72,7 @@
       "\t},",
       "});"
     ],
-    "description": "zQuery component with pages config for multi-page sections."
+    "description": "zQuery component with pages config — lazy-loaded multi-page sections with route-driven switching."
   },
   "zQuery Component (External Template)": {
     "prefix": "zq-component-template",
