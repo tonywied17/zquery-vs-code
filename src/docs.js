@@ -479,7 +479,7 @@ const dollarMethods = [
     name: 'version',
     kind: 'Property',
     detail: 'string',
-    documentation: "Library version string (e.g. `'0.5.1'`).",
+    documentation: "Library version string (e.g. `'0.6.1'`).",
     insertText: 'version',
   },
   {
