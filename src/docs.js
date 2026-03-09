@@ -252,6 +252,39 @@ const dollarMethods = [
     insertText: 'getRouter()',
   },
 
+  // -- Router instance methods (shown after $.getRouter() / $.router()) -----
+  // These live on dollarMethods so they show up in hover lookups.
+  {
+    name: 'navigate',
+    kind: 'Function',
+    detail: "(path, options?) → RouterInstance",
+    documentation:
+      'Navigate to a route path, optionally interpolating `:param` placeholders and passing history state.\n\n' +
+      '**Options:**\n' +
+      '| Key | Type | Description |\n' +
+      '|-----|------|-------------|\n' +
+      '| `params` | `Record<string, string \\| number>` | Replace `:param` segments in the path |\n' +
+      '| `state` | `any` | History state object passed to `pushState` |\n\n' +
+      '```js\n' +
+      "router.navigate('/user/:id', { params: { id: 42 } });\n" +
+      "// → navigates to /user/42\n\n" +
+      "router.navigate('/dashboard', { state: { from: 'login' } });\n" +
+      '```',
+    insertText: "navigate('${1:/path}'${2:, { params: { ${3} } \\}})",
+  },
+  {
+    name: 'replace',
+    kind: 'Function',
+    detail: "(path, options?) → RouterInstance",
+    documentation:
+      'Replace the current history entry (no back-button entry). Accepts the same `options` as `navigate()`.\n\n' +
+      '```js\n' +
+      "router.replace('/user/:id', { params: { id: 42 } });\n" +
+      "router.replace('/home');\n" +
+      '```',
+    insertText: "replace('${1:/path}'${2:, { params: { ${3} } \\}})",
+  },
+
   // -- Store ---------------------------------------------------------------
   {
     name: 'store',
@@ -488,7 +521,7 @@ const dollarMethods = [
     name: 'version',
     kind: 'Property',
     detail: 'string',
-    documentation: "Library version string (e.g. `'0.6.2'`).",
+    documentation: "Library version string (e.g. `'0.7.1'`).",
     insertText: 'version',
   },
   {
@@ -959,8 +992,21 @@ const zDirectives = [
     detail: 'Router Navigation Link',
     documentation:
       'SPA navigation link — clicks are intercepted by the router (no page reload).\n\n' +
-      '```html\n<a z-link="/">Home</a>\n<a z-link="/user/42">Profile</a>\n```',
+      '```html\n<a z-link="/">Home</a>\n<a z-link="/user/42">Profile</a>\n```\n\n' +
+      'For **dynamic paths**, use `:z-link` binding or `z-link-params`:\n' +
+      '```html\n<a :z-link="\'/user/\' + userId">Profile</a>\n<a z-link="/user/:id" z-link-params=\'{"id": "${item.id}"}\'>${item.name}</a>\n```',
     insertText: 'z-link="$1"',
+  },
+  {
+    name: 'z-link-params',
+    detail: 'Dynamic Route Parameters',
+    documentation:
+      'JSON attribute that provides `:param` values for the sibling `z-link` path. ' +
+      'The router interpolates each key into the path before navigating.\n\n' +
+      '```html\n<a z-link="/user/:id" z-link-params=\'{"id": "42"}\'> User 42 </a>\n```\n\n' +
+      '**Inside z-for loops** — use template expressions:\n' +
+      '```html\n<a z-for="user in users"\n   z-link="/user/:id"\n   z-link-params=\'{"id": "${user.id}"}\'>\n  ${user.name}\n</a>\n```',
+    insertText: 'z-link-params=\'{"$1": "$2"}\'',
   },
   // -- Utility Directives --------------------------------------------------
   {

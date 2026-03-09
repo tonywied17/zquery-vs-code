@@ -456,12 +456,26 @@
     ],
     "description": "Navigate to a path using the router."
   },
+  "zQuery Router Navigate (with params)": {
+    "prefix": "zq-navigate-params",
+    "body": [
+      "${1:router}.navigate('${2:/user/:id}', { params: { ${3:id}: ${4:userId} } });"
+    ],
+    "description": "Navigate to a path with :param interpolation."
+  },
   "zQuery Router Replace": {
     "prefix": "zq-replace",
     "body": [
       "${1:router}.replace('${2:/path}');"
     ],
     "description": "Replace the current route (no new history entry)."
+  },
+  "zQuery Router Replace (with params)": {
+    "prefix": "zq-replace-params",
+    "body": [
+      "${1:router}.replace('${2:/user/:id}', { params: { ${3:id}: ${4:userId} } });"
+    ],
+    "description": "Replace the current route with :param interpolation."
   },
   "zQuery Route (Dynamic Add)": {
     "prefix": "zq-route-add",

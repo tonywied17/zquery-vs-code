@@ -223,6 +223,13 @@
     ],
     "description": "zQuery SPA navigation link (intercepted by router, no reload)."
   },
+  "z-link with params": {
+    "prefix": "z-link-params",
+    "body": [
+      "<a z-link=\"${1:/user/:id}\" z-link-params='{\"${2:id}\": \"${3:value}\"}'>${4:Link Text}</a>"
+    ],
+    "description": "zQuery z-link with dynamic :param interpolation via z-link-params."
+  },
 
   "_comment_events": "──── @ Event Bindings ────",
 

@@ -1,6 +1,6 @@
 # zQuery for VS Code
 
-Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and **185+ code snippets**.
+Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied17/zero-query) frontend library — autocomplete, hover documentation, HTML directive support, and **190+ code snippets**.
 
 ---
 
@@ -27,7 +27,7 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 
 ### Code Snippets
 
-**185+ snippets** covering the entire zQuery API — type `zq-` to browse them all.
+**190+ snippets** covering the entire zQuery API — type `zq-` to browse them all.
 
 ---
 
@@ -112,7 +112,9 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 | `zq-route-change` | Subscribe to route changes |
 | `zq-getrouter` | Get the active router instance |
 | `zq-navigate` | Navigate to a path |
+| `zq-navigate-params` | Navigate with `:param` interpolation |
 | `zq-replace` | Replace the current route (no history entry) |
+| `zq-replace-params` | Replace with `:param` interpolation |
 | `zq-route-add` | Add a route dynamically at runtime |
 
 ### Store
@@ -226,6 +228,7 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 | `z-model-textarea` | Textarea with optional lazy modifier |
 | `z-ref` | Element reference (`this.refs.name`) |
 | `z-link` | SPA navigation link |
+| `z-link-params` | SPA link with dynamic `:param` interpolation |
 | `z-on` | Event binding (`z-on:event` form) |
 | `z-on-mod` | Event binding with modifier |
 
