@@ -137,8 +137,8 @@ const jsHoverProvider = {
     const beforeCursor = lineText.substring(0, position.character);
     const collMatch = word.match(/\.?(\w+)$/);
     if (collMatch && collectionMap.has(collMatch[1])) {
-      // Check if this looks like a collection chain: $() / $.all(…) / .method().method
-      if (/(?:\$|zQuery)(?:\.all)?\s*\(/.test(beforeCursor) || /\)\s*\.\s*\w*$/.test(beforeCursor)) {
+      // Check if this looks like a collection chain: $() / $.all(…) / $.create(…) / $.classes(…) / .method().method
+      if (/(?:\$|zQuery)(?:\.(?:all|create|classes|tag|name|children))?\s*\(/.test(beforeCursor) || /\)\s*\.\s*\w*$/.test(beforeCursor)) {
         return buildHover(collectionMap.get(collMatch[1]), 'ZQueryCollection');
       }
     }

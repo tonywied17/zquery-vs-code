@@ -11,7 +11,7 @@ Full developer tooling for the [zQuery (zero-query)](https://github.com/tonywied
 Type `$.` anywhere in JavaScript or TypeScript to instantly see every method on the `$` namespace — complete with descriptions, signatures, and smart insert text.
 
 - **Namespace completions** — `$.*`, `$.http.*`, `$.storage.*`, `$.session.*`, `$.bus.*`
-- **Collection chain completions** — `$('selector').` and `$.all('selector').` suggest 90+ chainable methods
+- **Collection chain completions** — `$('selector').`, `$.all('selector').`, `$.create('tag').`, `$.classes('name').`, `$.tag('div').`, `$.name('field').`, and `$.children('id').` suggest 90+ chainable methods
 - **Component key completions** — Inside `$.component({})` get suggestions for `state`, `render`, `styles`, `templateUrl`, `styleUrl`, `pages`, `base`, `computed`, `watch`, lifecycle hooks, and more
 - **HTML directive completions** — `@` triggers event directives, `z-` triggers structural directives, `:` triggers attribute binding shorthands
 
@@ -46,7 +46,7 @@ Hover over any `$` method call or HTML directive to see rich inline documentatio
 | `zq-name` | Select elements by name attribute → `ZQueryCollection` |
 | `zq-children` | Direct children of a parent element → `ZQueryCollection` |
 | `zq-all` | Query all matching elements and chain — alias for `$()` |
-| `zq-create` | Create a DOM element with attributes |
+| `zq-create` | Create a DOM element with attributes → `ZQueryCollection` (chainable) |
 | `zq-domready` | DOM-ready callback shorthand `$(fn)` |
 | `zq-ready` | DOM ready callback (`DOMContentLoaded`) |
 

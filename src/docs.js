@@ -82,18 +82,20 @@ const dollarMethods = [
   {
     name: 'create',
     kind: 'Function',
-    detail: "(tag, attrs?, ...children) → HTMLElement",
+    detail: "(tag, attrs?, ...children) → ZQueryCollection",
     documentation:
-      'Create a DOM element with attributes and children.\n\n' +
+      'Create a DOM element with attributes and children. Returns a **ZQueryCollection** so you can chain methods immediately.\n\n' +
       'Special `attrs` keys: `class`, `style` (object), `on*` (handler), `data` (object).\n\n' +
       '```js\n' +
-      "const el = $.create('div', {\n" +
+      "$.create('div', {\n" +
       "  class: 'card',\n" +
       "  style: { padding: '1rem' },\n" +
-      "  onclick: (e) => console.log('clicked'),\n" +
       "  data: { id: '42' }\n" +
-      "}, 'Content');\n" +
-      '```',
+      "}, 'Content')\n" +
+      "  .addClass('active')\n" +
+      "  .appendTo('#container');\n" +
+      '```\n\n' +
+      'Access the raw element with `[0]` or `.get(0)`.\n',
     insertText: "create('${1:div}', { $2 })",
   },
   {
@@ -755,7 +757,7 @@ const collectionMethods = [
   // Classes
   { name: 'addClass', kind: 'Method', detail: '(...names) → this', documentation: 'Add one or more classes (space-separated strings accepted).', insertText: "addClass('$1')" },
   { name: 'removeClass', kind: 'Method', detail: '(...names) → this', documentation: 'Remove one or more classes.', insertText: "removeClass('$1')" },
-  { name: 'toggleClass', kind: 'Method', detail: '(name, force?) → this', documentation: 'Toggle a class. Optional `force` boolean.', insertText: "toggleClass('$1')" },
+  { name: 'toggleClass', kind: 'Method', detail: '(...names, force?) → this', documentation: 'Toggle one or more classes. Space-separated names are supported. Optional trailing boolean to force add (`true`) or remove (`false`).\n\n```js\n$(\'.card\').toggleClass(\'active\', \'highlighted\');\n$(\'.card\').toggleClass(\'hidden\', true);\n```', insertText: "toggleClass('$1')" },
   { name: 'hasClass', kind: 'Method', detail: '(name) → boolean', documentation: 'Check if first element has the given class.', insertText: "hasClass('$1')" },
   // Attributes
   { name: 'attr', kind: 'Method', detail: '(name) | (name, value) → string | this', documentation: 'Get or set attribute.', insertText: "attr('$1')" },

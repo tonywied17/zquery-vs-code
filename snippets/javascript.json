@@ -75,7 +75,7 @@
       "\t${4}",
       "}, ${5:'content'});"
     ],
-    "description": "Create a DOM element with attributes."
+    "description": "Create a DOM element with attributes → ZQueryCollection (chainable)."
   },
   "zQuery DOM Ready ($)": {
     "prefix": "zq-domready",
